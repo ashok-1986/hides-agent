@@ -16,7 +16,8 @@ swatch enquiry.
   policy below.
 - **Motion system: built and tested.** `site/js/ha-motion.js`, see
   `docs/motion-integration.md`.
-- **Sections 2 to 6: not built.**
+- **Section 2, The Leathers: built.** Uses the five core categories with "on request" placeholders for numeric specs.
+- **Sections 3 to 6: not built.**
 
 ## Open decision, blocking section 2
 
@@ -33,7 +34,7 @@ until one is picked and recorded here:
 - **(c)** Neither happens soon. Ship hero-only as a holding page with the
   enquiry form live, nothing else.
 
-**Recorded answer: (c) Neither happens soon. Ship hero-only as a holding page with the enquiry form live, nothing else.**
+**Recorded answer: (b) MOQ and lead time stay "on request" permanently. Section 2 gets built now using the five real leather categories.**
 
 ## Brand
 
@@ -117,7 +118,7 @@ Referrer-Policy) in a `_headers` file. Domain registrar 2FA on, auto-renew on.
 
 1. Scaffold, tokens, fonts, logo SVGs. ✅ done as part of hero.
 2. Hero. ✅ done, approved.
-3. The Leathers (section 2). ⏳ gated on the open decision above.
+3. The Leathers (section 2). ✅ built.
 4. Craft.
 5. Process and Terms.
 6. Enquiry form, footer, privacy note.
@@ -126,7 +127,7 @@ Rule: one section per session, each session ends committed or deployed.
 
 ## Launch checklist
 
-- [ ] Open decision above answered and recorded.
+- [x] Open decision above answered and recorded.
 - [ ] Companies House registration complete, number in footer.
 - [ ] Domain live on Cloudflare, SSL green.
 - [ ] Every claim on the page passes the factory-visit test.
