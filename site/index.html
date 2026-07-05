@@ -272,9 +272,39 @@
       transform: translateY(26px);
     }
 
-    @media (max-width:720px) {
+    .craft-section, .process-terms-section {
+      padding: 120px 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 60px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 720px) {
       nav {
         padding: 26px 24px;
+      }
+
+      .leathers-section, .craft-section, .process-terms-section {
+        padding: 64px 24px;
+      }
+      
+      .process-terms-inner {
+        gap: 80px;
+      }
+      
+      .process-grid {
+        gap: 48px;
       }
 
       .hero-inner {
@@ -477,6 +507,87 @@
   </section>
 
   <!-- ======================================================================
+     SECTION 3: CRAFT
+     ====================================================================== -->
+  <section class="craft-section" id="craft">
+    <div class="craft-inner" data-stagger>
+      <div class="craft-header" data-animate="fade-up">
+        <h2 class="section-title">The Craft</h2>
+        <p class="section-subtitle">Precision tanning and finishing, controlled at every step.</p>
+      </div>
+      <div class="craft-grid">
+        <div class="photo-placeholder" data-animate="fade-up">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>" alt="Craft image placeholder 1">
+          <span class="placeholder-label">Awaiting real<br>photography</span>
+        </div>
+        <div class="photo-placeholder" data-animate="fade-up">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>" alt="Craft image placeholder 2">
+          <span class="placeholder-label">Awaiting real<br>photography</span>
+        </div>
+        <div class="photo-placeholder" data-animate="fade-up">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>" alt="Craft image placeholder 3">
+          <span class="placeholder-label">Awaiting real<br>photography</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+     SECTION 4 & 5: PROCESS & TERMS
+     ====================================================================== -->
+  <section class="process-terms-section" id="process">
+    <div class="process-terms-inner" data-stagger>
+      
+      <div class="process-block">
+        <div class="process-header" data-animate="fade-up">
+          <h2 class="section-title">The Process</h2>
+        </div>
+        <div class="process-grid">
+          <div class="process-step" data-animate="fade-up">
+            <span class="step-num">01</span>
+            <h3 class="step-title">Swatches</h3>
+            <p class="step-desc">Review our core range in person to verify quality, texture, and colour accuracy.</p>
+          </div>
+          <div class="process-step" data-animate="fade-up">
+            <span class="step-num">02</span>
+            <h3 class="step-title">Sample</h3>
+            <p class="step-desc">Order a sample hide for your first prototype before committing to volume.</p>
+          </div>
+          <div class="process-step" data-animate="fade-up">
+            <span class="step-num">03</span>
+            <h3 class="step-title">Bulk</h3>
+            <p class="step-desc">Consistent production supply delivered direct from the tannery to your studio.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="terms-block">
+        <div class="terms-header" data-animate="fade-up">
+          <h2 class="section-title">Terms</h2>
+        </div>
+        <div class="terms-grid" data-animate="fade-up">
+          <div class="term-item">
+            <span class="term-label">Minimum Order (MOQ)</span>
+            <span class="term-value">On request</span>
+          </div>
+          <div class="term-item">
+            <span class="term-label">Lead Times</span>
+            <span class="term-value">On request</span>
+          </div>
+          <div class="term-item">
+            <span class="term-label">Pricing</span>
+            <span class="term-value">On request</span>
+          </div>
+        </div>
+        <div class="provenance-note" data-animate="fade-up">
+          Full provenance documentation with every order.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
      ENQUIRY FORM & FOOTER
      ====================================================================== -->
   <style>
@@ -571,6 +682,350 @@
     
     .cta.cta-dark {
       color: var(--espresso);
+    }
+
+    /* Sections 3-5: Shared */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 48px);
+      font-weight: 600;
+      line-height: 1.18;
+      margin-bottom: 16px;
+    }
+    
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--espresso);
+      opacity: 0.7;
+      max-width: 50ch;
+      line-height: 1.6;
+    }
+
+    /* Section 3: Craft */
+    .craft-section {
+      padding: 96px 40px;
+      background: var(--parchment);
+      color: var(--espresso);
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .craft-inner {
+      max-width: 1200px;
+      width: 100%;
+    }
+    
+    .craft-header {
+      margin-bottom: 64px;
+    }
+    
+    .craft-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+    
+    .photo-placeholder {
+      position: relative;
+      display: block;
+      border: 1px solid var(--espresso);
+      background: rgba(34, 21, 9, 0.04);
+      overflow: hidden;
+    }
+    
+    .photo-placeholder img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+    
+    .placeholder-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--espresso);
+      opacity: 0.5;
+      padding: 20px;
+      line-height: 1.6;
+      pointer-events: none;
+    }
+
+    /* Sections 4 & 5: Process & Terms */
+    .process-terms-section {
+      padding: 96px 40px;
+      background: var(--parchment);
+      color: var(--espresso);
+      display: flex;
+      justify-content: center;
+      position: relative;
+      border-top: 1px solid rgba(34, 21, 9, 0.15);
+    }
+    
+    .process-terms-inner {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+    }
+    
+    .process-header, .terms-header {
+      margin-bottom: 48px;
+    }
+    
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 64px;
+    }
+    
+    .process-step {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--rust);
+      margin-bottom: 16px;
+    }
+    
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .step-desc {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--espresso);
+      opacity: 0.8;
+    }
+    
+    .terms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+      border-top: 1px solid rgba(34, 21, 9, 0.15);
+      padding-top: 32px;
+    }
+    
+    .term-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .term-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--espresso);
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+    
+    .term-value {
+      font-family: 'Urbanist', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--espresso);
+    }
+    
+    .provenance-note {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--espresso);
+      opacity: 0.8;
+      border-left: 2px solid var(--rust);
+      padding-left: 16px;
+    }
+
+    /* Sections 3-5: Shared */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 48px);
+      font-weight: 600;
+      line-height: 1.18;
+      margin-bottom: 16px;
+    }
+    
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--espresso);
+      opacity: 0.7;
+      max-width: 50ch;
+      line-height: 1.6;
+    }
+
+    /* Section 3: Craft */
+    .craft-section {
+      padding: 96px 40px;
+      background: var(--parchment);
+      color: var(--espresso);
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .craft-inner {
+      max-width: 1200px;
+      width: 100%;
+    }
+    
+    .craft-header {
+      margin-bottom: 64px;
+    }
+    
+    .craft-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+    
+    .photo-placeholder {
+      position: relative;
+      display: block;
+      border: 1px solid var(--espresso);
+      background: rgba(34, 21, 9, 0.04);
+      overflow: hidden;
+    }
+    
+    .photo-placeholder img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+    
+    .placeholder-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--espresso);
+      opacity: 0.5;
+      padding: 20px;
+      line-height: 1.6;
+      pointer-events: none;
+    }
+
+    /* Sections 4 & 5: Process & Terms */
+    .process-terms-section {
+      padding: 96px 40px;
+      background: var(--parchment);
+      color: var(--espresso);
+      display: flex;
+      justify-content: center;
+      position: relative;
+      border-top: 1px solid rgba(34, 21, 9, 0.15);
+    }
+    
+    .process-terms-inner {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+    }
+    
+    .process-header, .terms-header {
+      margin-bottom: 48px;
+    }
+    
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 64px;
+    }
+    
+    .process-step {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--rust);
+      margin-bottom: 16px;
+    }
+    
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .step-desc {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--espresso);
+      opacity: 0.8;
+    }
+    
+    .terms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+      border-top: 1px solid rgba(34, 21, 9, 0.15);
+      padding-top: 32px;
+    }
+    
+    .term-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .term-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--espresso);
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+    
+    .term-value {
+      font-family: 'Urbanist', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--espresso);
+    }
+    
+    .provenance-note {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--espresso);
+      opacity: 0.8;
+      border-left: 2px solid var(--rust);
+      padding-left: 16px;
     }
     
     /* Enquiry Form */
@@ -755,8 +1210,16 @@
     }
 
     @media (max-width: 720px) {
-      .leathers-section {
+      .leathers-section, .craft-section, .process-terms-section {
         padding: 64px 24px;
+      }
+      
+      .process-terms-inner {
+        gap: 80px;
+      }
+      
+      .process-grid {
+        gap: 48px;
       }
 
       .enquire-section {
