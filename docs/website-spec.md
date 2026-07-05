@@ -33,7 +33,8 @@ until one is picked and recorded here:
 - **(c)** Neither happens soon. Ship hero-only as a holding page with the
   enquiry form live, nothing else.
 
-**Recorded answer: (c) Neither happens soon. Ship hero-only as a holding page with the enquiry form live, nothing else.**
+**Recorded answer: ______________ (blank, not yet answered as of this spec
+version)**
 
 ## Brand
 
@@ -80,8 +81,11 @@ Founder taps link (WhatsApp/LinkedIn/IG)
   the logo's own rust is `#A84000`, slightly different, both are correct in
   their own context), saddle `#C0956A` (decorative only, fails text
   contrast), tannin `#4A5240` (reserved, sparingly).
-- Type: Cormorant Garamond (headlines, stand-in for TAN Mignon), Urbanist 400/500/600
-  (body, UI), JetBrains Mono 400 (data, labels).
+- Type: Cormorant Garamond (headlines, weight 600, replaced Prata this
+  round), Urbanist 400/500/600 (body, UI), JetBrains Mono 400 (data,
+  labels). TAN Mignon licence still not purchased, revisit if that changes.
+- Headline line-height: 1.18. Fixed from an earlier 1.04 that clipped
+  ascenders and descenders on words like "your" and "step" in the hero.
 - Verified contrast (WCAG AA, checked not assumed): parchment on espresso
   15.8:1, secondary text at 62% opacity 6.7:1, footer strip at 58% opacity
   6.0:1 after a fix during QA. Saddle never carries text.
@@ -127,6 +131,15 @@ Rule: one section per session, each session ends committed or deployed.
 ## Launch checklist
 
 - [ ] Open decision above answered and recorded.
+- [ ] Validation commitment (locked, July 2026): within 2 weeks of the
+      Craft section shipping, the site goes in front of 3 real DTC
+      founders from Ashok's network with one question: "Would you order
+      samples from this site?" Their answers settle any future animation
+      or design-direction debate. If this doesn't happen in the window,
+      it gets called out as a broken commitment, not quietly forgotten.
+- [ ] Live-site defects from July 2026 audit fixed: "[TBC]" company line
+      removed from public footer, dead Privacy Policy link replaced with
+      the real 5-line note, stray #top anchor fixed.
 - [ ] Companies House registration complete, number in footer.
 - [ ] Domain live on Cloudflare, SSL green.
 - [ ] Every claim on the page passes the factory-visit test.
