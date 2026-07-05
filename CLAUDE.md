@@ -43,9 +43,9 @@ the **HA monogram**, files under `assets/logo/`.
 }
 ```
 
-- Fonts: Prata (display/headlines), Urbanist 400/500/600 (body, UI), JetBrains
+- Fonts: Cormorant Garamond (display/headlines), Urbanist 400/500/600 (body, UI), JetBrains
   Mono 400 (specs, data, labels). Loaded via Google Fonts in the current
-  build. Prata is a stand-in for TAN Mignon if that licence is ever bought
+  build. Cormorant Garamond is a stand-in for TAN Mignon if that licence is ever bought
   later, keep the font-family declaration in one place so swapping it later
   is a one-line change.
 - Buttons and CTAs in the current hero are hairline underlines, not filled

@@ -80,7 +80,7 @@ Founder taps link (WhatsApp/LinkedIn/IG)
   the logo's own rust is `#A84000`, slightly different, both are correct in
   their own context), saddle `#C0956A` (decorative only, fails text
   contrast), tannin `#4A5240` (reserved, sparingly).
-- Type: Prata (headlines, stand-in for TAN Mignon), Urbanist 400/500/600
+- Type: Cormorant Garamond (headlines, stand-in for TAN Mignon), Urbanist 400/500/600
   (body, UI), JetBrains Mono 400 (data, labels).
 - Verified contrast (WCAG AA, checked not assumed): parchment on espresso
   15.8:1, secondary text at 62% opacity 6.7:1, footer strip at 58% opacity
