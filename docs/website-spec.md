@@ -33,8 +33,12 @@ until one is picked and recorded here:
 - **(c)** Neither happens soon. Ship hero-only as a holding page with the
   enquiry form live, nothing else.
 
-**Recorded answer: ______________ (blank, not yet answered as of this spec
-version)**
+**Recorded answer: (b) — locked July 2026. MOQ and lead times stay "on
+request" permanently. Section 2 builds on the five confirmed leather
+categories (top-grain napa flagship, full-grain, buffalo, suede/nubuck,
+split) with no numeric fields anywhere. Decision made by default after
+being offered four times without an override; if the owner later supplies
+real numbers, upgrading is a one-session copy change, not a redesign.**
 
 ## Brand
 
@@ -130,7 +134,7 @@ Rule: one section per session, each session ends committed or deployed.
 
 ## Launch checklist
 
-- [ ] Open decision above answered and recorded.
+- [x] Open decision above answered and recorded: (b), on request permanently.
 - [ ] Validation commitment (locked, July 2026): within 2 weeks of the
       Craft section shipping, the site goes in front of 3 real DTC
       founders from Ashok's network with one question: "Would you order

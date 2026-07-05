@@ -424,13 +424,155 @@
     </div>
   </section>
 
-  <!-- Sections 2-6 build one at a time after hero approval, per HD_Website_Spec.md build order -->
-
+  <!-- ======================================================================
+     SECTION 2: THE LEATHERS
+     ====================================================================== -->
+  <section class="leathers-section" id="leathers">
+    <div class="leathers-inner" data-stagger>
+      <div class="leathers-header" data-animate="fade-up">
+        <h2 class="leathers-title">The Leathers</h2>
+        <p class="leathers-subtitle">Our core offerings, sourced directly from the tannery floor. Full provenance documentation available on request.</p>
+      </div>
+      <div class="leather-grid">
+        <div class="leather-card" data-animate="fade-up">
+          <h3 class="leather-card-title">Top-grain Napa <span class="leather-card-flagship">Flagship</span></h3>
+          <ul class="leather-specs">
+            <li><span>MOQ</span> <span>On request</span></li>
+            <li><span>Lead time</span> <span>On request</span></li>
+          </ul>
+        </div>
+        <div class="leather-card" data-animate="fade-up">
+          <h3 class="leather-card-title">Full-grain</h3>
+          <ul class="leather-specs">
+            <li><span>MOQ</span> <span>On request</span></li>
+            <li><span>Lead time</span> <span>On request</span></li>
+          </ul>
+        </div>
+        <div class="leather-card" data-animate="fade-up">
+          <h3 class="leather-card-title">Buffalo</h3>
+          <ul class="leather-specs">
+            <li><span>MOQ</span> <span>On request</span></li>
+            <li><span>Lead time</span> <span>On request</span></li>
+          </ul>
+        </div>
+        <div class="leather-card" data-animate="fade-up">
+          <h3 class="leather-card-title">Suede &amp; Nubuck</h3>
+          <ul class="leather-specs">
+            <li><span>MOQ</span> <span>On request</span></li>
+            <li><span>Lead time</span> <span>On request</span></li>
+          </ul>
+        </div>
+        <div class="leather-card" data-animate="fade-up">
+          <h3 class="leather-card-title">Split</h3>
+          <ul class="leather-specs">
+            <li><span>MOQ</span> <span>On request</span></li>
+            <li><span>Lead time</span> <span>On request</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="leathers-foot" data-animate="fade-up" style="margin-top: 64px;">
+        <a class="cta cta-dark" href="#enquire">Request specs &amp; pricing <span class="arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
 
   <!-- ======================================================================
      ENQUIRY FORM & FOOTER
      ====================================================================== -->
   <style>
+    /* Section 2: The Leathers */
+    .leathers-section {
+      padding: 96px 40px;
+      background: var(--parchment);
+      color: var(--espresso);
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .leathers-inner {
+      max-width: 1200px;
+      width: 100%;
+    }
+    
+    .leathers-header {
+      margin-bottom: 64px;
+    }
+    
+    .leathers-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 48px);
+      font-weight: 600;
+      line-height: 1.18;
+      margin-bottom: 16px;
+    }
+    
+    .leathers-subtitle {
+      font-size: 18px;
+      color: var(--espresso);
+      opacity: 0.7;
+      max-width: 50ch;
+      line-height: 1.6;
+    }
+    
+    .leather-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 40px;
+    }
+    
+    .leather-card {
+      border-top: 1px solid rgba(34, 21, 9, 0.15);
+      padding-top: 24px;
+    }
+    
+    .leather-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .leather-card-flagship {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rust);
+      background: rgba(180, 80, 15, 0.1);
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    
+    .leather-specs {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--espresso);
+      opacity: 0.7;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .leather-specs li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(34, 21, 9, 0.05);
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .leather-specs li:last-child {
+      border-bottom: none;
+    }
+    
+    .cta.cta-dark {
+      color: var(--espresso);
+    }
+    
     /* Enquiry Form */
     .enquire-section {
       padding: 140px 40px;
@@ -613,6 +755,10 @@
     }
 
     @media (max-width: 720px) {
+      .leathers-section {
+        padding: 64px 24px;
+      }
+
       .enquire-section {
         padding: 80px 24px;
       }
