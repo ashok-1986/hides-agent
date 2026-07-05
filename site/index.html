@@ -1,660 +1,685 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hides Agent</title>
-<link rel="stylesheet" href="css/ha-motion.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Urbanist:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --espresso:#221509;
-    --espresso-soft:#2E1E10;
-    --parchment:#F6F1E7;
-    --parchment-dim:rgba(246,241,231,0.62);
-    --rust:#B4500F;
-    --hairline:rgba(246,241,231,0.16);
-  }
-  *{box-sizing:border-box; margin:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--espresso);
-    color:var(--parchment);
-    font-family:'Urbanist',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit; text-decoration:none;}
-  a:focus-visible{outline:1.5px solid var(--rust); outline-offset:4px;}
-
-  /* grain of the hide, pure CSS, no imagery */
-  .grain{
-    position:fixed; inset:0; pointer-events:none; opacity:0.07; z-index:1;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  }
-
-  header{
-    position:sticky; top:0; left:0; right:0; z-index:100;
-    background: rgba(34,21,9,0.55);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(246,241,231,0.12);
-  }
-  nav{
-    max-width:1280px; margin:0 auto; padding:34px 40px;
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  .brand{display:flex; align-items:center; gap:14px;}
-  .brand .mark{height:30px; width:auto; display:block;}
-  .wordmark{
-    font-family:'Urbanist',sans-serif; font-weight:500; font-size:13px;
-    letter-spacing:0.42em; text-transform:uppercase;
-  }
-  .wordmark .dot{color:var(--rust);}
-  .nav-enquire{
-    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.18em;
-    text-transform:uppercase; color:var(--parchment-dim);
-    border-bottom:1px solid var(--hairline); padding-bottom:3px;
-    transition:color .2s ease, border-color .2s ease;
-  }
-  .nav-enquire:hover{color:var(--parchment); border-color:var(--rust);}
-
-  .hero{
-    min-height:100dvh; position:relative; z-index:2;
-    display:flex; flex-direction:column; justify-content:center;
-  }
-  .hero-bg {
-    position: absolute; inset: 0; pointer-events: none;
-    width: 100%; height: 100%; object-fit: cover;
-    opacity: 0.7;
-    z-index: -1;
-  }
-  .hero-sheen{
-    position:absolute; inset:0; pointer-events:none;
-    background:radial-gradient(560px circle at var(--mx,68%) var(--my,38%),
-      rgba(246,241,231,0.045), transparent 70%);
-  }
-  .hero-inner{
-    max-width:1280px; margin:0 auto; padding:0 40px; width:100%;
-  }
-  .hero-rule{
-    display:flex; align-items:center; gap:18px; margin-bottom:40px;
-  }
-  .hero-rule .line{width:56px; height:1px; background:var(--rust);}
-  .hero-rule span{
-    font-family:'JetBrains Mono',monospace; font-size:11.5px;
-    letter-spacing:0.3em; text-transform:uppercase; color:var(--parchment-dim);
-  }
-  h1{
-    font-family:'Cormorant Garamond',serif; font-weight:600;
-    font-size:clamp(46px,7.4vw,104px);
-    line-height:1.18; letter-spacing:0.005em;
-    max-width:13ch;
-    /* pressed into the hide: dark upper bevel, faint lower catchlight */
-    text-shadow:
-      0 -1px 1px rgba(0,0,0,0.55),
-      0  1px 0  rgba(246,241,231,0.10);
-  }
-  h1 .rust-stop{color:var(--rust);}
-  .hero-foot{
-    margin-top:64px;
-    display:flex; justify-content:space-between; align-items:flex-end;
-    gap:32px; flex-wrap:wrap;
-  }
-  .hero-sub{
-    font-size:16px; font-weight:400; line-height:1.7;
-    color:var(--parchment-dim); max-width:38ch;
-  }
-  .cta{
-    display:inline-flex; align-items:center; gap:14px;
-    font-family:'JetBrains Mono',monospace; font-size:12.5px;
-    letter-spacing:0.22em; text-transform:uppercase; color:var(--parchment);
-    padding-bottom:8px; border-bottom:1px solid var(--rust);
-    transition:gap .25s ease; min-height:44px; align-items:center;
-  }
-  .cta:hover{gap:22px;}
-  .cta .arrow{color:var(--rust); font-size:15px; transition:transform .25s ease;}
-
-  .hero-base{
-    position:absolute; bottom:0; left:0; right:0;
-    border-top:1px solid var(--hairline);
-  }
-  .hero-base-inner{
-    max-width:1280px; margin:0 auto; padding:22px 40px;
-    display:flex; justify-content:space-between; align-items:center;
-    font-family:'JetBrains Mono',monospace; font-size:11px;
-    letter-spacing:0.2em; text-transform:uppercase; color:rgba(246,241,231,0.58);
-  }
-  .hero-base-inner .sep{color:var(--rust);}
-
-  /* entrance handled in JS with reduced-motion respect */
-  .rise{opacity:0; transform:translateY(26px);}
-
-  @media (max-width:720px){
-    nav{padding:26px 24px;}
-    .hero-inner{padding:0 24px;}
-    .hero-foot{margin-top:44px;}
-    .hero-base-inner{padding:18px 24px; font-size:9.5px; letter-spacing:0.14em;}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .rise{opacity:1 !important; transform:none !important;}
-  }
-</style>
-</head>
-<body>
-<div class="grain" aria-hidden="true"></div>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="ha-mono">
-  <path d="M122.8,204.78c.13-.05.27-.1.4-.15v-.04c-.13.06-.27.12-.4.19Z"/>
-  <g>
-    <g>
-      <path fill="#a84000" d="M768.9,425.25c0,24.65-19.98,44.64-44.64,44.64-59.21-2.35-59.19-86.93,0-89.27,24.65,0,44.63,19.98,44.63,44.64Z"/>
-      <path fill="#F6F1E7" d="M655.69,425.72l1.02,2.89L481.09,12.61,414.17.35c37.9,17.85,23.99,66.06-8.6,125.58V12.26L351.66,0v213.86c-4.68,7.2-9.39,14.43-14.1,21.66l-172.36-.49V85.82l-53.91-10.51v352.68l53.91,10.51v-189.63l160.5,4.92c-59.71,92.28-112.83,181.81-68.99,216.56,24.96,16.73,59,5.74,94.94-17.71v26.13l53.91,10.51v-78.8c54.63-48.58,105.4-108.45,127.22-126.5l56.68,135.49c14.41,34.47,121.75,59.05,140.23,59.3-30.71-1.68-62.21-23.71-74.01-53.07ZM405.57,399.32c-17.08,14.26-32.66,25.38-44.89,30.44-32.15,20.28-77.05-4.38-77.2-43.98,2.46-114.62,137.48-225.55,158.69-337.58l89.08,232.1c-31.81,29.06-83.31,83.66-125.68,119.03Z"/>
-    </g>
-    <g>
-      <g>
-        <path fill="#F6F1E7" d="M659.99,652.01c-10.04-18.49-25.36-20.6-25.36-20.6l-68.67-12.91,14.57-11.1c22.62,10.89,49.64,1.8,60.42-20.37,10.8-22.23,1.19-49.17-21.47-60.19-3.68-1.79-7.48-2.99-11.3-3.75h49.9v-1.34h-62.24v.59c-15.45,1.16-29.79,10.07-36.95,24.8-10.62,21.85-1.48,48.21,20.35,59.57l-19.26,14.67.06.06-4.66,3.5c-2.34-2.03-4.21-4.51-5.11-7.07l.23.65-40.48-96.77h-14.33c26.22,12.34-57.28,89-35.58,106.21,16.98,11.38,52.59-34.01,62.39-42.11l12.81,30.61c2.66,6.36,8.14,10.94,14.63,12.56l-.37.27s13.15,2.69,30.94,6.48c-.95.27-1.9.54-2.87.83-13.23,4-30.78,11.35-39.28,23.7-5.09,7.39-6.45,15.81-4.07,25,5.48,21.17,30.36,28.48,51.91,28.48,1.65,0,3.28-.04,4.88-.12,22.93-1.19,47.33-10.59,57.67-26.81,6.18-5.86,19.03-20.51,11.24-34.84ZM560.03,547.69c7.01-14.42,30.55-17.42,52.58-6.72,22.03,10.71,34.21,31.07,27.21,45.49-7.01,14.42-30.55,17.42-52.58,6.71-22.03-10.71-34.21-31.07-27.2-45.49ZM483.6,618.78c-7.53,4.63-17.36-1.1-17.44-9.94-.22-23.96,31.86-52.83,35.86-76.29l20.13,52.45c-10.08,9.21-28.93,29.79-38.55,33.78ZM652.32,674.21l-.14-.02c-.15.99-.36,1.95-.6,2.9-.87,2.87-2,5.47-3.04,7.54-9.46,16.77-34.25,26.5-57.53,27.7-21.99,1.13-49.72-5.34-55.42-27.35-2.28-8.81-.98-16.85,3.87-23.91,9-13.09,28.61-20.6,43.98-24.67,15.1,3.23,33.06,7.14,49.08,10.86,19.94,4.62,22.01,16.83,19.8,26.95Z"/>
-        <path fill="#F6F1E7" d="M650.26,576.16c0-6.64,1.05-13.09,3.16-19.36,2.11-6.27,5.29-11.93,9.56-16.99,4.27-5.06,9.72-9.06,16.35-12.01,6.64-2.95,14.43-4.42,23.39-4.42s16.2,1.82,22.99,5.45c6.79,3.63,12.17,8.53,16.12,14.69,3.95,6.16,5.93,13.14,5.93,20.94,0,1.69-.11,3.5-.32,5.45-.21,1.95-.58,3.61-1.11,4.98-.53,1.37-1.21,2.05-2.05,2.05h-82.01c.1,9.16,1.34,16.88,3.71,23.15,2.37,6.27,5.55,11.3,9.56,15.09,4,3.79,8.45,6.53,13.35,8.22,4.9,1.69,9.88,2.53,14.93,2.53,5.58,0,10.95-.84,16.12-2.53,5.16-1.68,9.61-3.95,13.35-6.79,3.74-2.84,6.24-5.95,7.51-9.32l4.27,1.58c-4.32,6.74-10.06,12.22-17.22,16.43-7.16,4.21-15.64,6.32-25.44,6.32-8.32,0-15.72-1.56-22.2-4.66-6.48-3.11-11.96-7.32-16.43-12.64-4.48-5.32-7.85-11.27-10.11-17.86-2.27-6.58-3.4-13.35-3.4-20.3ZM662.42,573h73.95c.53-4.42.76-8.37.71-11.85-.05-3.48-.58-7.14-1.58-10.98-1-3.84-2.71-7.51-5.14-10.98-2.42-3.48-5.85-6.32-10.27-8.53-4.42-2.21-10.17-3.32-17.22-3.32-6.22,0-11.77,1.26-16.67,3.79-4.9,2.53-9.06,5.95-12.48,10.27-3.42,4.32-6.08,9.19-7.98,14.62-1.9,5.43-3,11.09-3.32,16.99Z"/>
-        <path fill="#F6F1E7" d="M758.33,564.47c0-5.27.02-10.53.08-15.8.05-5.27-.26-10.01-.95-14.22-.69-4.21-2.08-7.37-4.19-9.48h16.12v85.8c1.68-3.05,3.71-7.27,6.08-12.64,2.37-5.37,5.03-11.35,7.98-17.93,2.95-6.58,6.19-13.19,9.72-19.83,3.53-6.64,7.24-12.74,11.14-18.33,3.9-5.58,8-10.09,12.32-13.51,4.32-3.42,8.74-5.14,13.27-5.14,4,0,6.95,1.16,8.85,3.48,1.9,2.32,3.16,5.53,3.79,9.64.63,4.11.95,8.95.95,14.54v39.5c0,5.27-.03,10.53-.08,15.8-.05,5.27.26,10.01.95,14.22.68,4.21,2.08,7.37,4.19,9.48h-21.17c2.11-2.11,3.5-5.27,4.19-9.48.68-4.21,1-8.95.95-14.22-.05-5.27-.08-10.53-.08-15.8v-48.03c0-2.32-.21-4.21-.63-5.69-.42-1.47-1.21-2.79-2.37-3.95-1.16-1.16-2.84-1.74-5.06-1.74-3.48,0-7.01,1.82-10.59,5.45-3.58,3.63-7.19,8.43-10.82,14.38-3.63,5.95-7.16,12.51-10.59,19.67-3.42,7.16-6.72,14.33-9.88,21.49-3.16,7.16-6.08,13.72-8.77,19.67-2.69,5.95-5.03,10.74-7.03,14.38-2,3.63-3.63,5.45-4.9,5.45-1.37,0-2.29-.61-2.77-1.82-.47-1.21-.71-2.45-.71-3.71v-61.62Z"/>
-        <path fill="#F6F1E7" d="M849.6,549.59c2.68-.33,5.08-1.57,7.21-3.7,2.13-2.13,3.97-4.7,5.52-7.71,1.55-3.01,2.72-6,3.51-8.97.79-2.97,1.19-5.46,1.19-7.46h.5v26.47h7.78v1.88h-7.78v68.36c0,1.5.21,3.12.63,4.83.42,1.71,1.13,3.18,2.13,4.39,1,1.21,2.38,1.82,4.14,1.82,1.09,0,2.05-.13,2.89-.38.83-.25,1.67-.54,2.51-.88l.38,1.13c-2.34,1.5-5.02,2.26-8.03,2.26-2.18,0-4.31-.65-6.4-1.94-2.09-1.3-3.81-3.26-5.14-5.9-1.34-2.63-2.01-5.96-2.01-9.97v-63.72h-9.03v-.5Z"/>
-      </g>
-      <path fill="#a84000" d="M95.67,540.17v-18.43h18.43v18.43h-18.43Z"/>
-      <path fill="#F6F1E7" d="M64.24,521.74h12.53v104.45h-12.53v-49.69H12.53v49.69H0v-104.45h12.53v42.23h51.7v-42.23Z"/>
-      <path fill="#F6F1E7" d="M133,626.19v-104.45h34.54c7.21,0,13.98,1.36,20.29,4.07,6.32,2.71,11.86,6.47,16.64,11.26,4.77,4.8,8.52,10.35,11.23,16.64,2.71,6.29,4.07,13.04,4.07,20.26s-1.36,13.96-4.07,20.26c-2.71,6.29-6.45,11.84-11.23,16.64-4.78,4.8-10.32,8.55-16.64,11.26-6.32,2.71-13.08,4.07-20.29,4.07h-34.54ZM145.53,613.66h22.01c5.47,0,10.61-1.03,15.41-3.1,4.8-2.06,9.01-4.91,12.65-8.54s6.48-7.85,8.54-12.65c2.06-4.8,3.1-9.93,3.1-15.41s-1.03-10.61-3.1-15.41c-2.06-4.8-4.92-9.01-8.58-12.65-3.66-3.63-7.87-6.48-12.65-8.54-4.77-2.06-9.9-3.1-15.37-3.1h-22.01v79.38Z"/>
-      <path fill="#F6F1E7" d="M238.66,626.19v-104.45h64.09v12.53h-51.55v29.69h42.23v12.53h-42.23v37.15h51.55v12.53h-64.09Z"/>
-      <path fill="#F6F1E7" d="M359.92,629.77c-5.62,0-11.04-.88-16.26-2.65-5.22-1.76-9.79-4.29-13.69-7.57-3.91-3.28-6.68-7.19-8.32-11.71l11.71-4.4c.99,2.79,2.85,5.21,5.56,7.27,2.71,2.07,5.91,3.67,9.59,4.81,3.68,1.14,7.48,1.72,11.41,1.72,4.48,0,8.64-.73,12.5-2.2,3.85-1.47,6.98-3.52,9.36-6.15,2.39-2.64,3.58-5.72,3.58-9.25s-1.24-6.6-3.73-8.92c-2.49-2.31-5.67-4.15-9.55-5.52-3.88-1.37-7.93-2.42-12.16-3.17-7.21-1.19-13.67-2.9-19.36-5.11-5.7-2.21-10.2-5.31-13.5-9.29-3.31-3.98-4.96-9.22-4.96-15.74,0-6.07,1.75-11.36,5.26-15.89,3.51-4.52,8.14-8.03,13.91-10.52,5.77-2.49,11.99-3.73,18.65-3.73,5.52,0,10.88.86,16.08,2.57,5.2,1.72,9.78,4.21,13.76,7.5,3.98,3.28,6.84,7.29,8.58,12.01l-11.86,4.33c-1-2.84-2.85-5.28-5.56-7.35-2.71-2.06-5.89-3.66-9.55-4.77-3.66-1.12-7.47-1.68-11.45-1.68-4.43-.05-8.56.67-12.38,2.16-3.83,1.49-6.94,3.56-9.33,6.19-2.39,2.64-3.58,5.7-3.58,9.18,0,4.18,1.11,7.37,3.32,9.59,2.21,2.21,5.23,3.87,9.06,4.96,3.83,1.09,8.13,2.06,12.91,2.91,6.76,1.14,13.03,2.95,18.8,5.41,5.77,2.46,10.41,5.73,13.91,9.81,3.51,4.08,5.26,9.1,5.26,15.07s-1.75,11.37-5.26,15.89c-3.51,4.53-8.14,8.03-13.91,10.52-5.77,2.49-12.04,3.73-18.8,3.73Z"/>
-    </g>
-  </g>
-</g></defs></svg>
-
-<header>
-  <nav>
-    <a class="brand" href="#top" aria-label="Hides Agent">
-      <svg class="mark" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880.2 713.79">
-<style>.cls-1{fill:#a84000;}.cls-2{fill:#F6F1E7;}</style>
-  <path d="M122.8,204.78c.13-.05.27-.1.4-.15v-.04c-.13.06-.27.12-.4.19Z"/>
-  <g>
-    <g>
-      <path class="cls-1" d="M768.9,425.25c0,24.65-19.98,44.64-44.64,44.64-59.21-2.35-59.19-86.93,0-89.27,24.65,0,44.63,19.98,44.63,44.64Z"/>
-      <path class="cls-2" d="M655.69,425.72l1.02,2.89L481.09,12.61,414.17.35c37.9,17.85,23.99,66.06-8.6,125.58V12.26L351.66,0v213.86c-4.68,7.2-9.39,14.43-14.1,21.66l-172.36-.49V85.82l-53.91-10.51v352.68l53.91,10.51v-189.63l160.5,4.92c-59.71,92.28-112.83,181.81-68.99,216.56,24.96,16.73,59,5.74,94.94-17.71v26.13l53.91,10.51v-78.8c54.63-48.58,105.4-108.45,127.22-126.5l56.68,135.49c14.41,34.47,121.75,59.05,140.23,59.3-30.71-1.68-62.21-23.71-74.01-53.07ZM405.57,399.32c-17.08,14.26-32.66,25.38-44.89,30.44-32.15,20.28-77.05-4.38-77.2-43.98,2.46-114.62,137.48-225.55,158.69-337.58l89.08,232.1c-31.81,29.06-83.31,83.66-125.68,119.03Z"/>
-    </g>
-    <g>
-      <g>
-        <path class="cls-2" d="M659.99,652.01c-10.04-18.49-25.36-20.6-25.36-20.6l-68.67-12.91,14.57-11.1c22.62,10.89,49.64,1.8,60.42-20.37,10.8-22.23,1.19-49.17-21.47-60.19-3.68-1.79-7.48-2.99-11.3-3.75h49.9v-1.34h-62.24v.59c-15.45,1.16-29.79,10.07-36.95,24.8-10.62,21.85-1.48,48.21,20.35,59.57l-19.26,14.67.06.06-4.66,3.5c-2.34-2.03-4.21-4.51-5.11-7.07l.23.65-40.48-96.77h-14.33c26.22,12.34-57.28,89-35.58,106.21,16.98,11.38,52.59-34.01,62.39-42.11l12.81,30.61c2.66,6.36,8.14,10.94,14.63,12.56l-.37.27s13.15,2.69,30.94,6.48c-.95.27-1.9.54-2.87.83-13.23,4-30.78,11.35-39.28,23.7-5.09,7.39-6.45,15.81-4.07,25,5.48,21.17,30.36,28.48,51.91,28.48,1.65,0,3.28-.04,4.88-.12,22.93-1.19,47.33-10.59,57.67-26.81,6.18-5.86,19.03-20.51,11.24-34.84ZM560.03,547.69c7.01-14.42,30.55-17.42,52.58-6.72,22.03,10.71,34.21,31.07,27.21,45.49-7.01,14.42-30.55,17.42-52.58,6.71-22.03-10.71-34.21-31.07-27.2-45.49ZM483.6,618.78c-7.53,4.63-17.36-1.1-17.44-9.94-.22-23.96,31.86-52.83,35.86-76.29l20.13,52.45c-10.08,9.21-28.93,29.79-38.55,33.78ZM652.32,674.21l-.14-.02c-.15.99-.36,1.95-.6,2.9-.87,2.87-2,5.47-3.04,7.54-9.46,16.77-34.25,26.5-57.53,27.7-21.99,1.13-49.72-5.34-55.42-27.35-2.28-8.81-.98-16.85,3.87-23.91,9-13.09,28.61-20.6,43.98-24.67,15.1,3.23,33.06,7.14,49.08,10.86,19.94,4.62,22.01,16.83,19.8,26.95Z"/>
-        <path class="cls-2" d="M650.26,576.16c0-6.64,1.05-13.09,3.16-19.36,2.11-6.27,5.29-11.93,9.56-16.99,4.27-5.06,9.72-9.06,16.35-12.01,6.64-2.95,14.43-4.42,23.39-4.42s16.2,1.82,22.99,5.45c6.79,3.63,12.17,8.53,16.12,14.69,3.95,6.16,5.93,13.14,5.93,20.94,0,1.69-.11,3.5-.32,5.45-.21,1.95-.58,3.61-1.11,4.98-.53,1.37-1.21,2.05-2.05,2.05h-82.01c.1,9.16,1.34,16.88,3.71,23.15,2.37,6.27,5.55,11.3,9.56,15.09,4,3.79,8.45,6.53,13.35,8.22,4.9,1.69,9.88,2.53,14.93,2.53,5.58,0,10.95-.84,16.12-2.53,5.16-1.68,9.61-3.95,13.35-6.79,3.74-2.84,6.24-5.95,7.51-9.32l4.27,1.58c-4.32,6.74-10.06,12.22-17.22,16.43-7.16,4.21-15.64,6.32-25.44,6.32-8.32,0-15.72-1.56-22.2-4.66-6.48-3.11-11.96-7.32-16.43-12.64-4.48-5.32-7.85-11.27-10.11-17.86-2.27-6.58-3.4-13.35-3.4-20.3ZM662.42,573h73.95c.53-4.42.76-8.37.71-11.85-.05-3.48-.58-7.14-1.58-10.98-1-3.84-2.71-7.51-5.14-10.98-2.42-3.48-5.85-6.32-10.27-8.53-4.42-2.21-10.17-3.32-17.22-3.32-6.22,0-11.77,1.26-16.67,3.79-4.9,2.53-9.06,5.95-12.48,10.27-3.42,4.32-6.08,9.19-7.98,14.62-1.9,5.43-3,11.09-3.32,16.99Z"/>
-        <path class="cls-2" d="M758.33,564.47c0-5.27.02-10.53.08-15.8.05-5.27-.26-10.01-.95-14.22-.69-4.21-2.08-7.37-4.19-9.48h16.12v85.8c1.68-3.05,3.71-7.27,6.08-12.64,2.37-5.37,5.03-11.35,7.98-17.93,2.95-6.58,6.19-13.19,9.72-19.83,3.53-6.64,7.24-12.74,11.14-18.33,3.9-5.58,8-10.09,12.32-13.51,4.32-3.42,8.74-5.14,13.27-5.14,4,0,6.95,1.16,8.85,3.48,1.9,2.32,3.16,5.53,3.79,9.64.63,4.11.95,8.95.95,14.54v39.5c0,5.27-.03,10.53-.08,15.8-.05,5.27.26,10.01.95,14.22.68,4.21,2.08,7.37,4.19,9.48h-21.17c2.11-2.11,3.5-5.27,4.19-9.48.68-4.21,1-8.95.95-14.22-.05-5.27-.08-10.53-.08-15.8v-48.03c0-2.32-.21-4.21-.63-5.69-.42-1.47-1.21-2.79-2.37-3.95-1.16-1.16-2.84-1.74-5.06-1.74-3.48,0-7.01,1.82-10.59,5.45-3.58,3.63-7.19,8.43-10.82,14.38-3.63,5.95-7.16,12.51-10.59,19.67-3.42,7.16-6.72,14.33-9.88,21.49-3.16,7.16-6.08,13.72-8.77,19.67-2.69,5.95-5.03,10.74-7.03,14.38-2,3.63-3.63,5.45-4.9,5.45-1.37,0-2.29-.61-2.77-1.82-.47-1.21-.71-2.45-.71-3.71v-61.62Z"/>
-        <path class="cls-2" d="M849.6,549.59c2.68-.33,5.08-1.57,7.21-3.7,2.13-2.13,3.97-4.7,5.52-7.71,1.55-3.01,2.72-6,3.51-8.97.79-2.97,1.19-5.46,1.19-7.46h.5v26.47h7.78v1.88h-7.78v68.36c0,1.5.21,3.12.63,4.83.42,1.71,1.13,3.18,2.13,4.39,1,1.21,2.38,1.82,4.14,1.82,1.09,0,2.05-.13,2.89-.38.83-.25,1.67-.54,2.51-.88l.38,1.13c-2.34,1.5-5.02,2.26-8.03,2.26-2.18,0-4.31-.65-6.4-1.94-2.09-1.3-3.81-3.26-5.14-5.9-1.34-2.63-2.01-5.96-2.01-9.97v-63.72h-9.03v-.5Z"/>
-      </g>
-      <path class="cls-1" d="M95.67,540.17v-18.43h18.43v18.43h-18.43Z"/>
-      <path class="cls-2" d="M64.24,521.74h12.53v104.45h-12.53v-49.69H12.53v49.69H0v-104.45h12.53v42.23h51.7v-42.23Z"/>
-      <path class="cls-2" d="M133,626.19v-104.45h34.54c7.21,0,13.98,1.36,20.29,4.07,6.32,2.71,11.86,6.47,16.64,11.26,4.77,4.8,8.52,10.35,11.23,16.64,2.71,6.29,4.07,13.04,4.07,20.26s-1.36,13.96-4.07,20.26c-2.71,6.29-6.45,11.84-11.23,16.64-4.78,4.8-10.32,8.55-16.64,11.26-6.32,2.71-13.08,4.07-20.29,4.07h-34.54ZM145.53,613.66h22.01c5.47,0,10.61-1.03,15.41-3.1,4.8-2.06,9.01-4.91,12.65-8.54s6.48-7.85,8.54-12.65c2.06-4.8,3.1-9.93,3.1-15.41s-1.03-10.61-3.1-15.41c-2.06-4.8-4.92-9.01-8.58-12.65-3.66-3.63-7.87-6.48-12.65-8.54-4.77-2.06-9.9-3.1-15.37-3.1h-22.01v79.38Z"/>
-      <path class="cls-2" d="M238.66,626.19v-104.45h64.09v12.53h-51.55v29.69h42.23v12.53h-42.23v37.15h51.55v12.53h-64.09Z"/>
-      <path class="cls-2" d="M359.92,629.77c-5.62,0-11.04-.88-16.26-2.65-5.22-1.76-9.79-4.29-13.69-7.57-3.91-3.28-6.68-7.19-8.32-11.71l11.71-4.4c.99,2.79,2.85,5.21,5.56,7.27,2.71,2.07,5.91,3.67,9.59,4.81,3.68,1.14,7.48,1.72,11.41,1.72,4.48,0,8.64-.73,12.5-2.2,3.85-1.47,6.98-3.52,9.36-6.15,2.39-2.64,3.58-5.72,3.58-9.25s-1.24-6.6-3.73-8.92c-2.49-2.31-5.67-4.15-9.55-5.52-3.88-1.37-7.93-2.42-12.16-3.17-7.21-1.19-13.67-2.9-19.36-5.11-5.7-2.21-10.2-5.31-13.5-9.29-3.31-3.98-4.96-9.22-4.96-15.74,0-6.07,1.75-11.36,5.26-15.89,3.51-4.52,8.14-8.03,13.91-10.52,5.77-2.49,11.99-3.73,18.65-3.73,5.52,0,10.88.86,16.08,2.57,5.2,1.72,9.78,4.21,13.76,7.5,3.98,3.28,6.84,7.29,8.58,12.01l-11.86,4.33c-1-2.84-2.85-5.28-5.56-7.35-2.71-2.06-5.89-3.66-9.55-4.77-3.66-1.12-7.47-1.68-11.45-1.68-4.43-.05-8.56.67-12.38,2.16-3.83,1.49-6.94,3.56-9.33,6.19-2.39,2.64-3.58,5.7-3.58,9.18,0,4.18,1.11,7.37,3.32,9.59,2.21,2.21,5.23,3.87,9.06,4.96,3.83,1.09,8.13,2.06,12.91,2.91,6.76,1.14,13.03,2.95,18.8,5.41,5.77,2.46,10.41,5.73,13.91,9.81,3.51,4.08,5.26,9.1,5.26,15.07s-1.75,11.37-5.26,15.89c-3.51,4.53-8.14,8.03-13.91,10.52-5.77,2.49-12.04,3.73-18.8,3.73Z"/>
-    </g>
-  </g>
-</svg>
-      <span class="wordmark">Hides<span class="dot">&nbsp;&middot;&nbsp;</span>Agent</span>
-    </a>
-    <a class="nav-enquire" href="#enquire">Enquire</a>
-  </nav>
-</header>
-
-<section class="hero" id="top">
-  <video class="hero-bg" id="heroVideo" src="img/hero_video.mp4" poster="img/hero-banner.png" muted loop playsinline preload="auto" aria-hidden="true"></video>
-  <script>
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const hv = document.getElementById('heroVideo');
-      hv.setAttribute('autoplay', '');
-      hv.play().catch(()=>{});
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hides Agent</title>
+  <link rel="stylesheet" href="css/ha-motion.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Urbanist:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --espresso: #221509;
+      --espresso-soft: #2E1E10;
+      --parchment: #F6F1E7;
+      --parchment-dim: rgba(246, 241, 231, 0.62);
+      --rust: #B4500F;
+      --hairline: rgba(246, 241, 231, 0.16);
     }
-  </script>
-  <div class="hero-sheen" id="sheen" aria-hidden="true"></div>
-  <div class="hero-inner">
-    <div class="hero-rule" data-animate="fade-up">
-      <div class="line"></div>
-      <span>Wholesale leather &middot; Direct from the tannery</span>
-    </div>
-    <h1 data-lines>The hide, one step from your studio.</h1>
-    <div class="hero-foot" data-animate="fade-up">
-      <p class="hero-sub">Top-grain napa and full-grain hides, selected and finished to your specification. From tannery floor to studio, no middle layers. Full provenance documentation with every order.</p>
-      <a class="cta" href="#enquire">Request the swatch kit <span class="arrow">&rarr;</span></a>
-    </div>
-  </div>
-  <div class="hero-base" aria-hidden="true">
-    <div class="hero-base-inner">
-      <span>Top-grain napa</span><span class="sep">&middot;</span>
-      <span>Full-grain</span><span class="sep">&middot;</span>
-      <span>Suede &amp; nubuck</span><span class="sep">&middot;</span>
-      <span>Cut to spec</span>
-    </div>
-  </div>
-</section>
 
-<!-- ======================================================================
-     SECTION 2: THE LEATHERS
-     ====================================================================== -->
-<style>
-  .leathers-section {
-    padding: 140px 40px;
-    background: var(--parchment);
-    color: var(--espresso);
-    position: relative;
-    z-index: 2;
-  }
-  .leathers-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-  .section-rule {
-    display: flex; align-items: center; gap: 18px; margin-bottom: 32px;
-  }
-  .section-rule .line {
-    width: 56px; height: 1px; background: var(--rust);
-  }
-  .section-rule span {
-    font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
-    letter-spacing: 0.3em; text-transform: uppercase; color: rgba(34,21,9,0.55);
-  }
-  .leathers-header {
-    margin-bottom: 80px;
-  }
-  .leathers-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(38px, 6vw, 72px);
-    line-height: 1.1;
-    margin-bottom: 24px;
-    max-width: 15ch;
-  }
-  .leathers-header p {
-    font-size: 16px;
-    line-height: 1.7;
-    max-width: 48ch;
-    color: rgba(34,21,9,0.75);
-  }
-  .leather-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px;
-    margin-bottom: 80px;
-  }
-  .leather-card {
-    padding: 48px 40px;
-    border: 1px solid rgba(34,21,9,0.12);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    transition: border-color 0.3s ease;
-  }
-  .leather-card:hover {
-    border-color: var(--rust);
-  }
-  .leather-card h3 {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    line-height: 1.3;
-  }
-  .flagship-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--parchment);
-    background: var(--rust);
-    padding: 4px 8px;
-  }
-  .specs {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    line-height: 1.6;
-    letter-spacing: 0.05em;
-    width: 100%;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 16px;
-    margin-top: auto;
-  }
-  .spec-row {
-    display: contents;
-  }
-  .spec-label {
-    color: rgba(34,21,9,0.55);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .spec-val {
-    text-align: right;
-    font-weight: 500;
-  }
-  .leathers-foot {
-    display: flex;
-    justify-content: center;
-  }
-  .cta.dark {
-    color: var(--espresso);
-    border-bottom-color: rgba(34,21,9,0.25);
-  }
-  .cta.dark:hover {
-    border-bottom-color: var(--rust);
-  }
-  
-  @media (max-width: 720px) {
-    .leathers-section { padding: 80px 24px; }
-    .leather-card { padding: 32px 24px; }
-  }
-</style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
 
-<section class="leathers-section" id="leathers">
-  <div class="leathers-inner">
-    <div class="leathers-header" data-animate="fade-up">
-      <div class="section-rule">
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--espresso);
+      color: var(--parchment);
+      font-family: 'Urbanist', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible {
+      outline: 1.5px solid var(--rust);
+      outline-offset: 4px;
+    }
+
+    /* grain of the hide, pure CSS, no imagery */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.07;
+      z-index: 1;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(34, 21, 9, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(246, 241, 231, 0.12);
+    }
+
+    nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 34px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand .mark {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    .wordmark {
+      font-family: 'Urbanist', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+    }
+
+    .wordmark .dot {
+      color: var(--rust);
+    }
+
+    .nav-enquire {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--parchment-dim);
+      border-bottom: 1px solid var(--hairline);
+      padding-bottom: 3px;
+      transition: color .2s ease, border-color .2s ease;
+    }
+
+    .nav-enquire:hover {
+      color: var(--parchment);
+      border-color: var(--rust);
+    }
+
+    .hero {
+      min-height: 100dvh;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    .hero-sheen {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(560px circle at var(--mx, 68%) var(--my, 38%),
+          rgba(246, 241, 231, 0.045), transparent 70%);
+    }
+
+    .hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      width: 100%;
+    }
+
+    .hero-rule {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .hero-rule .line {
+      width: 56px;
+      height: 1px;
+      background: var(--rust);
+    }
+
+    .hero-rule span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--parchment-dim);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: clamp(46px, 7.4vw, 104px);
+      line-height: 1.18;
+      letter-spacing: 0.005em;
+      max-width: 13ch;
+      /* pressed into the hide: dark upper bevel, faint lower catchlight */
+      text-shadow:
+        0 -1px 1px rgba(0, 0, 0, 0.55),
+        0 1px 0 rgba(246, 241, 231, 0.10);
+    }
+
+    h1 .rust-stop {
+      color: var(--rust);
+    }
+
+    .hero-foot {
+      margin-top: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--parchment-dim);
+      max-width: 38ch;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rust);
+      transition: gap .25s ease;
+      min-height: 44px;
+      align-items: center;
+    }
+
+    .cta:hover {
+      gap: 22px;
+    }
+
+    .cta .arrow {
+      color: var(--rust);
+      font-size: 15px;
+      transition: transform .25s ease;
+    }
+
+    .hero-base {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid var(--hairline);
+    }
+
+    .hero-base-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 22px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(246, 241, 231, 0.58);
+    }
+
+    .hero-base-inner .sep {
+      color: var(--rust);
+    }
+
+    /* entrance handled in JS with reduced-motion respect */
+    .rise {
+      opacity: 0;
+      transform: translateY(26px);
+    }
+
+    @media (max-width:720px) {
+      nav {
+        padding: 26px 24px;
+      }
+
+      .hero-inner {
+        padding: 0 24px;
+      }
+
+      .hero-foot {
+        margin-top: 44px;
+      }
+
+      .hero-base-inner {
+        padding: 18px 24px;
+        font-size: 9.5px;
+        letter-spacing: 0.14em;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rise {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="ha-mono">
+        <path d="M122.8,204.78c.13-.05.27-.1.4-.15v-.04c-.13.06-.27.12-.4.19Z" />
+        <g>
+          <g>
+            <path fill="#a84000"
+              d="M768.9,425.25c0,24.65-19.98,44.64-44.64,44.64-59.21-2.35-59.19-86.93,0-89.27,24.65,0,44.63,19.98,44.63,44.64Z" />
+            <path fill="#F6F1E7"
+              d="M655.69,425.72l1.02,2.89L481.09,12.61,414.17.35c37.9,17.85,23.99,66.06-8.6,125.58V12.26L351.66,0v213.86c-4.68,7.2-9.39,14.43-14.1,21.66l-172.36-.49V85.82l-53.91-10.51v352.68l53.91,10.51v-189.63l160.5,4.92c-59.71,92.28-112.83,181.81-68.99,216.56,24.96,16.73,59,5.74,94.94-17.71v26.13l53.91,10.51v-78.8c54.63-48.58,105.4-108.45,127.22-126.5l56.68,135.49c14.41,34.47,121.75,59.05,140.23,59.3-30.71-1.68-62.21-23.71-74.01-53.07ZM405.57,399.32c-17.08,14.26-32.66,25.38-44.89,30.44-32.15,20.28-77.05-4.38-77.2-43.98,2.46-114.62,137.48-225.55,158.69-337.58l89.08,232.1c-31.81,29.06-83.31,83.66-125.68,119.03Z" />
+          </g>
+          <g>
+            <g>
+              <path fill="#F6F1E7"
+                d="M659.99,652.01c-10.04-18.49-25.36-20.6-25.36-20.6l-68.67-12.91,14.57-11.1c22.62,10.89,49.64,1.8,60.42-20.37,10.8-22.23,1.19-49.17-21.47-60.19-3.68-1.79-7.48-2.99-11.3-3.75h49.9v-1.34h-62.24v.59c-15.45,1.16-29.79,10.07-36.95,24.8-10.62,21.85-1.48,48.21,20.35,59.57l-19.26,14.67.06.06-4.66,3.5c-2.34-2.03-4.21-4.51-5.11-7.07l.23.65-40.48-96.77h-14.33c26.22,12.34-57.28,89-35.58,106.21,16.98,11.38,52.59-34.01,62.39-42.11l12.81,30.61c2.66,6.36,8.14,10.94,14.63,12.56l-.37.27s13.15,2.69,30.94,6.48c-.95.27-1.9.54-2.87.83-13.23,4-30.78,11.35-39.28,23.7-5.09,7.39-6.45,15.81-4.07,25,5.48,21.17,30.36,28.48,51.91,28.48,1.65,0,3.28-.04,4.88-.12,22.93-1.19,47.33-10.59,57.67-26.81,6.18-5.86,19.03-20.51,11.24-34.84ZM560.03,547.69c7.01-14.42,30.55-17.42,52.58-6.72,22.03,10.71,34.21,31.07,27.21,45.49-7.01,14.42-30.55,17.42-52.58,6.71-22.03-10.71-34.21-31.07-27.2-45.49ZM483.6,618.78c-7.53,4.63-17.36-1.1-17.44-9.94-.22-23.96,31.86-52.83,35.86-76.29l20.13,52.45c-10.08,9.21-28.93,29.79-38.55,33.78ZM652.32,674.21l-.14-.02c-.15.99-.36,1.95-.6,2.9-.87,2.87-2,5.47-3.04,7.54-9.46,16.77-34.25,26.5-57.53,27.7-21.99,1.13-49.72-5.34-55.42-27.35-2.28-8.81-.98-16.85,3.87-23.91,9-13.09,28.61-20.6,43.98-24.67,15.1,3.23,33.06,7.14,49.08,10.86,19.94,4.62,22.01,16.83,19.8,26.95Z" />
+              <path fill="#F6F1E7"
+                d="M650.26,576.16c0-6.64,1.05-13.09,3.16-19.36,2.11-6.27,5.29-11.93,9.56-16.99,4.27-5.06,9.72-9.06,16.35-12.01,6.64-2.95,14.43-4.42,23.39-4.42s16.2,1.82,22.99,5.45c6.79,3.63,12.17,8.53,16.12,14.69,3.95,6.16,5.93,13.14,5.93,20.94,0,1.69-.11,3.5-.32,5.45-.21,1.95-.58,3.61-1.11,4.98-.53,1.37-1.21,2.05-2.05,2.05h-82.01c.1,9.16,1.34,16.88,3.71,23.15,2.37,6.27,5.55,11.3,9.56,15.09,4,3.79,8.45,6.53,13.35,8.22,4.9,1.69,9.88,2.53,14.93,2.53,5.58,0,10.95-.84,16.12-2.53,5.16-1.68,9.61-3.95,13.35-6.79,3.74-2.84,6.24-5.95,7.51-9.32l4.27,1.58c-4.32,6.74-10.06,12.22-17.22,16.43-7.16,4.21-15.64,6.32-25.44,6.32-8.32,0-15.72-1.56-22.2-4.66-6.48-3.11-11.96-7.32-16.43-12.64-4.48-5.32-7.85-11.27-10.11-17.86-2.27-6.58-3.4-13.35-3.4-20.3ZM662.42,573h73.95c.53-4.42.76-8.37.71-11.85-.05-3.48-.58-7.14-1.58-10.98-1-3.84-2.71-7.51-5.14-10.98-2.42-3.48-5.85-6.32-10.27-8.53-4.42-2.21-10.17-3.32-17.22-3.32-6.22,0-11.77,1.26-16.67,3.79-4.9,2.53-9.06,5.95-12.48,10.27-3.42,4.32-6.08,9.19-7.98,14.62-1.9,5.43-3,11.09-3.32,16.99Z" />
+              <path fill="#F6F1E7"
+                d="M758.33,564.47c0-5.27.02-10.53.08-15.8.05-5.27-.26-10.01-.95-14.22-.69-4.21-2.08-7.37-4.19-9.48h16.12v85.8c1.68-3.05,3.71-7.27,6.08-12.64,2.37-5.37,5.03-11.35,7.98-17.93,2.95-6.58,6.19-13.19,9.72-19.83,3.53-6.64,7.24-12.74,11.14-18.33,3.9-5.58,8-10.09,12.32-13.51,4.32-3.42,8.74-5.14,13.27-5.14,4,0,6.95,1.16,8.85,3.48,1.9,2.32,3.16,5.53,3.79,9.64.63,4.11.95,8.95.95,14.54v39.5c0,5.27-.03,10.53-.08,15.8-.05,5.27.26,10.01.95,14.22.68,4.21,2.08,7.37,4.19,9.48h-21.17c2.11-2.11,3.5-5.27,4.19-9.48.68-4.21,1-8.95.95-14.22-.05-5.27-.08-10.53-.08-15.8v-48.03c0-2.32-.21-4.21-.63-5.69-.42-1.47-1.21-2.79-2.37-3.95-1.16-1.16-2.84-1.74-5.06-1.74-3.48,0-7.01,1.82-10.59,5.45-3.58,3.63-7.19,8.43-10.82,14.38-3.63,5.95-7.16,12.51-10.59,19.67-3.42,7.16-6.72,14.33-9.88,21.49-3.16,7.16-6.08,13.72-8.77,19.67-2.69,5.95-5.03,10.74-7.03,14.38-2,3.63-3.63,5.45-4.9,5.45-1.37,0-2.29-.61-2.77-1.82-.47-1.21-.71-2.45-.71-3.71v-61.62Z" />
+              <path fill="#F6F1E7"
+                d="M849.6,549.59c2.68-.33,5.08-1.57,7.21-3.7,2.13-2.13,3.97-4.7,5.52-7.71,1.55-3.01,2.72-6,3.51-8.97.79-2.97,1.19-5.46,1.19-7.46h.5v26.47h7.78v1.88h-7.78v68.36c0,1.5.21,3.12.63,4.83.42,1.71,1.13,3.18,2.13,4.39,1,1.21,2.38,1.82,4.14,1.82,1.09,0,2.05-.13,2.89-.38.83-.25,1.67-.54,2.51-.88l.38,1.13c-2.34,1.5-5.02,2.26-8.03,2.26-2.18,0-4.31-.65-6.4-1.94-2.09-1.3-3.81-3.26-5.14-5.9-1.34-2.63-2.01-5.96-2.01-9.97v-63.72h-9.03v-.5Z" />
+            </g>
+            <path fill="#a84000" d="M95.67,540.17v-18.43h18.43v18.43h-18.43Z" />
+            <path fill="#F6F1E7"
+              d="M64.24,521.74h12.53v104.45h-12.53v-49.69H12.53v49.69H0v-104.45h12.53v42.23h51.7v-42.23Z" />
+            <path fill="#F6F1E7"
+              d="M133,626.19v-104.45h34.54c7.21,0,13.98,1.36,20.29,4.07,6.32,2.71,11.86,6.47,16.64,11.26,4.77,4.8,8.52,10.35,11.23,16.64,2.71,6.29,4.07,13.04,4.07,20.26s-1.36,13.96-4.07,20.26c-2.71,6.29-6.45,11.84-11.23,16.64-4.78,4.8-10.32,8.55-16.64,11.26-6.32,2.71-13.08,4.07-20.29,4.07h-34.54ZM145.53,613.66h22.01c5.47,0,10.61-1.03,15.41-3.1,4.8-2.06,9.01-4.91,12.65-8.54s6.48-7.85,8.54-12.65c2.06-4.8,3.1-9.93,3.1-15.41s-1.03-10.61-3.1-15.41c-2.06-4.8-4.92-9.01-8.58-12.65-3.66-3.63-7.87-6.48-12.65-8.54-4.77-2.06-9.9-3.1-15.37-3.1h-22.01v79.38Z" />
+            <path fill="#F6F1E7"
+              d="M238.66,626.19v-104.45h64.09v12.53h-51.55v29.69h42.23v12.53h-42.23v37.15h51.55v12.53h-64.09Z" />
+            <path fill="#F6F1E7"
+              d="M359.92,629.77c-5.62,0-11.04-.88-16.26-2.65-5.22-1.76-9.79-4.29-13.69-7.57-3.91-3.28-6.68-7.19-8.32-11.71l11.71-4.4c.99,2.79,2.85,5.21,5.56,7.27,2.71,2.07,5.91,3.67,9.59,4.81,3.68,1.14,7.48,1.72,11.41,1.72,4.48,0,8.64-.73,12.5-2.2,3.85-1.47,6.98-3.52,9.36-6.15,2.39-2.64,3.58-5.72,3.58-9.25s-1.24-6.6-3.73-8.92c-2.49-2.31-5.67-4.15-9.55-5.52-3.88-1.37-7.93-2.42-12.16-3.17-7.21-1.19-13.67-2.9-19.36-5.11-5.7-2.21-10.2-5.31-13.5-9.29-3.31-3.98-4.96-9.22-4.96-15.74,0-6.07,1.75-11.36,5.26-15.89,3.51-4.52,8.14-8.03,13.91-10.52,5.77-2.49,11.99-3.73,18.65-3.73,5.52,0,10.88.86,16.08,2.57,5.2,1.72,9.78,4.21,13.76,7.5,3.98,3.28,6.84,7.29,8.58,12.01l-11.86,4.33c-1-2.84-2.85-5.28-5.56-7.35-2.71-2.06-5.89-3.66-9.55-4.77-3.66-1.12-7.47-1.68-11.45-1.68-4.43-.05-8.56.67-12.38,2.16-3.83,1.49-6.94,3.56-9.33,6.19-2.39,2.64-3.58,5.7-3.58,9.18,0,4.18,1.11,7.37,3.32,9.59,2.21,2.21,5.23,3.87,9.06,4.96,3.83,1.09,8.13,2.06,12.91,2.91,6.76,1.14,13.03,2.95,18.8,5.41,5.77,2.46,10.41,5.73,13.91,9.81,3.51,4.08,5.26,9.1,5.26,15.07s-1.75,11.37-5.26,15.89c-3.51,4.53-8.14,8.03-13.91,10.52-5.77,2.49-12.04,3.73-18.8,3.73Z" />
+          </g>
+        </g>
+      </g>
+    </defs>
+  </svg>
+
+  <header>
+    <nav>
+      <a class="brand" href="#top" aria-label="Hides Agent">
+        <svg class="mark" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 880.2 713.79">
+          <style>
+            .cls-1 {
+              fill: #a84000;
+            }
+
+            .cls-2 {
+              fill: #F6F1E7;
+            }
+          </style>
+          <path d="M122.8,204.78c.13-.05.27-.1.4-.15v-.04c-.13.06-.27.12-.4.19Z" />
+          <g>
+            <g>
+              <path class="cls-1"
+                d="M768.9,425.25c0,24.65-19.98,44.64-44.64,44.64-59.21-2.35-59.19-86.93,0-89.27,24.65,0,44.63,19.98,44.63,44.64Z" />
+              <path class="cls-2"
+                d="M655.69,425.72l1.02,2.89L481.09,12.61,414.17.35c37.9,17.85,23.99,66.06-8.6,125.58V12.26L351.66,0v213.86c-4.68,7.2-9.39,14.43-14.1,21.66l-172.36-.49V85.82l-53.91-10.51v352.68l53.91,10.51v-189.63l160.5,4.92c-59.71,92.28-112.83,181.81-68.99,216.56,24.96,16.73,59,5.74,94.94-17.71v26.13l53.91,10.51v-78.8c54.63-48.58,105.4-108.45,127.22-126.5l56.68,135.49c14.41,34.47,121.75,59.05,140.23,59.3-30.71-1.68-62.21-23.71-74.01-53.07ZM405.57,399.32c-17.08,14.26-32.66,25.38-44.89,30.44-32.15,20.28-77.05-4.38-77.2-43.98,2.46-114.62,137.48-225.55,158.69-337.58l89.08,232.1c-31.81,29.06-83.31,83.66-125.68,119.03Z" />
+            </g>
+            <g>
+              <g>
+                <path class="cls-2"
+                  d="M659.99,652.01c-10.04-18.49-25.36-20.6-25.36-20.6l-68.67-12.91,14.57-11.1c22.62,10.89,49.64,1.8,60.42-20.37,10.8-22.23,1.19-49.17-21.47-60.19-3.68-1.79-7.48-2.99-11.3-3.75h49.9v-1.34h-62.24v.59c-15.45,1.16-29.79,10.07-36.95,24.8-10.62,21.85-1.48,48.21,20.35,59.57l-19.26,14.67.06.06-4.66,3.5c-2.34-2.03-4.21-4.51-5.11-7.07l.23.65-40.48-96.77h-14.33c26.22,12.34-57.28,89-35.58,106.21,16.98,11.38,52.59-34.01,62.39-42.11l12.81,30.61c2.66,6.36,8.14,10.94,14.63,12.56l-.37.27s13.15,2.69,30.94,6.48c-.95.27-1.9.54-2.87.83-13.23,4-30.78,11.35-39.28,23.7-5.09,7.39-6.45,15.81-4.07,25,5.48,21.17,30.36,28.48,51.91,28.48,1.65,0,3.28-.04,4.88-.12,22.93-1.19,47.33-10.59,57.67-26.81,6.18-5.86,19.03-20.51,11.24-34.84ZM560.03,547.69c7.01-14.42,30.55-17.42,52.58-6.72,22.03,10.71,34.21,31.07,27.21,45.49-7.01,14.42-30.55,17.42-52.58,6.71-22.03-10.71-34.21-31.07-27.2-45.49ZM483.6,618.78c-7.53,4.63-17.36-1.1-17.44-9.94-.22-23.96,31.86-52.83,35.86-76.29l20.13,52.45c-10.08,9.21-28.93,29.79-38.55,33.78ZM652.32,674.21l-.14-.02c-.15.99-.36,1.95-.6,2.9-.87,2.87-2,5.47-3.04,7.54-9.46,16.77-34.25,26.5-57.53,27.7-21.99,1.13-49.72-5.34-55.42-27.35-2.28-8.81-.98-16.85,3.87-23.91,9-13.09,28.61-20.6,43.98-24.67,15.1,3.23,33.06,7.14,49.08,10.86,19.94,4.62,22.01,16.83,19.8,26.95Z" />
+                <path class="cls-2"
+                  d="M650.26,576.16c0-6.64,1.05-13.09,3.16-19.36,2.11-6.27,5.29-11.93,9.56-16.99,4.27-5.06,9.72-9.06,16.35-12.01,6.64-2.95,14.43-4.42,23.39-4.42s16.2,1.82,22.99,5.45c6.79,3.63,12.17,8.53,16.12,14.69,3.95,6.16,5.93,13.14,5.93,20.94,0,1.69-.11,3.5-.32,5.45-.21,1.95-.58,3.61-1.11,4.98-.53,1.37-1.21,2.05-2.05,2.05h-82.01c.1,9.16,1.34,16.88,3.71,23.15,2.37,6.27,5.55,11.3,9.56,15.09,4,3.79,8.45,6.53,13.35,8.22,4.9,1.69,9.88,2.53,14.93,2.53,5.58,0,10.95-.84,16.12-2.53,5.16-1.68,9.61-3.95,13.35-6.79,3.74-2.84,6.24-5.95,7.51-9.32l4.27,1.58c-4.32,6.74-10.06,12.22-17.22,16.43-7.16,4.21-15.64,6.32-25.44,6.32-8.32,0-15.72-1.56-22.2-4.66-6.48-3.11-11.96-7.32-16.43-12.64-4.48-5.32-7.85-11.27-10.11-17.86-2.27-6.58-3.4-13.35-3.4-20.3ZM662.42,573h73.95c.53-4.42.76-8.37.71-11.85-.05-3.48-.58-7.14-1.58-10.98-1-3.84-2.71-7.51-5.14-10.98-2.42-3.48-5.85-6.32-10.27-8.53-4.42-2.21-10.17-3.32-17.22-3.32-6.22,0-11.77,1.26-16.67,3.79-4.9,2.53-9.06,5.95-12.48,10.27-3.42,4.32-6.08,9.19-7.98,14.62-1.9,5.43-3,11.09-3.32,16.99Z" />
+                <path class="cls-2"
+                  d="M758.33,564.47c0-5.27.02-10.53.08-15.8.05-5.27-.26-10.01-.95-14.22-.69-4.21-2.08-7.37-4.19-9.48h16.12v85.8c1.68-3.05,3.71-7.27,6.08-12.64,2.37-5.37,5.03-11.35,7.98-17.93,2.95-6.58,6.19-13.19,9.72-19.83,3.53-6.64,7.24-12.74,11.14-18.33,3.9-5.58,8-10.09,12.32-13.51,4.32-3.42,8.74-5.14,13.27-5.14,4,0,6.95,1.16,8.85,3.48,1.9,2.32,3.16,5.53,3.79,9.64.63,4.11.95,8.95.95,14.54v39.5c0,5.27-.03,10.53-.08,15.8-.05,5.27.26,10.01.95,14.22.68,4.21,2.08,7.37,4.19,9.48h-21.17c2.11-2.11,3.5-5.27,4.19-9.48.68-4.21,1-8.95.95-14.22-.05-5.27-.08-10.53-.08-15.8v-48.03c0-2.32-.21-4.21-.63-5.69-.42-1.47-1.21-2.79-2.37-3.95-1.16-1.16-2.84-1.74-5.06-1.74-3.48,0-7.01,1.82-10.59,5.45-3.58,3.63-7.19,8.43-10.82,14.38-3.63,5.95-7.16,12.51-10.59,19.67-3.42,7.16-6.72,14.33-9.88,21.49-3.16,7.16-6.08,13.72-8.77,19.67-2.69,5.95-5.03,10.74-7.03,14.38-2,3.63-3.63,5.45-4.9,5.45-1.37,0-2.29-.61-2.77-1.82-.47-1.21-.71-2.45-.71-3.71v-61.62Z" />
+                <path class="cls-2"
+                  d="M849.6,549.59c2.68-.33,5.08-1.57,7.21-3.7,2.13-2.13,3.97-4.7,5.52-7.71,1.55-3.01,2.72-6,3.51-8.97.79-2.97,1.19-5.46,1.19-7.46h.5v26.47h7.78v1.88h-7.78v68.36c0,1.5.21,3.12.63,4.83.42,1.71,1.13,3.18,2.13,4.39,1,1.21,2.38,1.82,4.14,1.82,1.09,0,2.05-.13,2.89-.38.83-.25,1.67-.54,2.51-.88l.38,1.13c-2.34,1.5-5.02,2.26-8.03,2.26-2.18,0-4.31-.65-6.4-1.94-2.09-1.3-3.81-3.26-5.14-5.9-1.34-2.63-2.01-5.96-2.01-9.97v-63.72h-9.03v-.5Z" />
+              </g>
+              <path class="cls-1" d="M95.67,540.17v-18.43h18.43v18.43h-18.43Z" />
+              <path class="cls-2"
+                d="M64.24,521.74h12.53v104.45h-12.53v-49.69H12.53v49.69H0v-104.45h12.53v42.23h51.7v-42.23Z" />
+              <path class="cls-2"
+                d="M133,626.19v-104.45h34.54c7.21,0,13.98,1.36,20.29,4.07,6.32,2.71,11.86,6.47,16.64,11.26,4.77,4.8,8.52,10.35,11.23,16.64,2.71,6.29,4.07,13.04,4.07,20.26s-1.36,13.96-4.07,20.26c-2.71,6.29-6.45,11.84-11.23,16.64-4.78,4.8-10.32,8.55-16.64,11.26-6.32,2.71-13.08,4.07-20.29,4.07h-34.54ZM145.53,613.66h22.01c5.47,0,10.61-1.03,15.41-3.1,4.8-2.06,9.01-4.91,12.65-8.54s6.48-7.85,8.54-12.65c2.06-4.8,3.1-9.93,3.1-15.41s-1.03-10.61-3.1-15.41c-2.06-4.8-4.92-9.01-8.58-12.65-3.66-3.63-7.87-6.48-12.65-8.54-4.77-2.06-9.9-3.1-15.37-3.1h-22.01v79.38Z" />
+              <path class="cls-2"
+                d="M238.66,626.19v-104.45h64.09v12.53h-51.55v29.69h42.23v12.53h-42.23v37.15h51.55v12.53h-64.09Z" />
+              <path class="cls-2"
+                d="M359.92,629.77c-5.62,0-11.04-.88-16.26-2.65-5.22-1.76-9.79-4.29-13.69-7.57-3.91-3.28-6.68-7.19-8.32-11.71l11.71-4.4c.99,2.79,2.85,5.21,5.56,7.27,2.71,2.07,5.91,3.67,9.59,4.81,3.68,1.14,7.48,1.72,11.41,1.72,4.48,0,8.64-.73,12.5-2.2,3.85-1.47,6.98-3.52,9.36-6.15,2.39-2.64,3.58-5.72,3.58-9.25s-1.24-6.6-3.73-8.92c-2.49-2.31-5.67-4.15-9.55-5.52-3.88-1.37-7.93-2.42-12.16-3.17-7.21-1.19-13.67-2.9-19.36-5.11-5.7-2.21-10.2-5.31-13.5-9.29-3.31-3.98-4.96-9.22-4.96-15.74,0-6.07,1.75-11.36,5.26-15.89,3.51-4.52,8.14-8.03,13.91-10.52,5.77-2.49,11.99-3.73,18.65-3.73,5.52,0,10.88.86,16.08,2.57,5.2,1.72,9.78,4.21,13.76,7.5,3.98,3.28,6.84,7.29,8.58,12.01l-11.86,4.33c-1-2.84-2.85-5.28-5.56-7.35-2.71-2.06-5.89-3.66-9.55-4.77-3.66-1.12-7.47-1.68-11.45-1.68-4.43-.05-8.56.67-12.38,2.16-3.83,1.49-6.94,3.56-9.33,6.19-2.39,2.64-3.58,5.7-3.58,9.18,0,4.18,1.11,7.37,3.32,9.59,2.21,2.21,5.23,3.87,9.06,4.96,3.83,1.09,8.13,2.06,12.91,2.91,6.76,1.14,13.03,2.95,18.8,5.41,5.77,2.46,10.41,5.73,13.91,9.81,3.51,4.08,5.26,9.1,5.26,15.07s-1.75,11.37-5.26,15.89c-3.51,4.53-8.14,8.03-13.91,10.52-5.77,2.49-12.04,3.73-18.8,3.73Z" />
+            </g>
+          </g>
+        </svg>
+        <span class="wordmark">Hides<span class="dot">&nbsp;&middot;&nbsp;</span>Agent</span>
+      </a>
+      <a class="nav-enquire" href="#enquire">Enquire</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <video class="hero-bg" id="heroVideo" src="img/hero_video.mp4" poster="img/hero-banner.png" muted loop playsinline
+      preload="auto" aria-hidden="true"></video>
+    <script>
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const hv = document.getElementById('heroVideo');
+        hv.setAttribute('autoplay', '');
+        hv.play().catch(() => { });
+      }
+    </script>
+    <div class="hero-sheen" id="sheen" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-rule" data-animate="fade-up">
         <div class="line"></div>
-        <span>The Leathers</span>
+        <span>Wholesale leather &middot; Direct from the tannery</span>
       </div>
-      <h2>Grades &amp; specifications</h2>
-      <p>Our core range is finished and stocked directly at the tannery, bypassing intermediaries. Full documentation and origin certificates accompany every bulk shipment.</p>
-    </div>
-
-    <div class="leather-grid" data-stagger>
-      <div class="leather-card" data-animate="fade-up">
-        <h3>Top-grain napa <span class="flagship-badge">Flagship</span></h3>
-        <div class="specs">
-          <div class="spec-row">
-            <span class="spec-label">MOQ</span>
-            <span class="spec-val">On request</span>
-          </div>
-          <div class="spec-row">
-            <span class="spec-label">Lead time</span>
-            <span class="spec-val">On request</span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="leather-card" data-animate="fade-up">
-        <h3>Full-grain</h3>
-        <div class="specs">
-          <div class="spec-row">
-            <span class="spec-label">MOQ</span>
-            <span class="spec-val">On request</span>
-          </div>
-          <div class="spec-row">
-            <span class="spec-label">Lead time</span>
-            <span class="spec-val">On request</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="leather-card" data-animate="fade-up">
-        <h3>Buffalo</h3>
-        <div class="specs">
-          <div class="spec-row">
-            <span class="spec-label">MOQ</span>
-            <span class="spec-val">On request</span>
-          </div>
-          <div class="spec-row">
-            <span class="spec-label">Lead time</span>
-            <span class="spec-val">On request</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="leather-card" data-animate="fade-up">
-        <h3>Suede &amp; nubuck</h3>
-        <div class="specs">
-          <div class="spec-row">
-            <span class="spec-label">MOQ</span>
-            <span class="spec-val">On request</span>
-          </div>
-          <div class="spec-row">
-            <span class="spec-label">Lead time</span>
-            <span class="spec-val">On request</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="leather-card" data-animate="fade-up">
-        <h3>Split</h3>
-        <div class="specs">
-          <div class="spec-row">
-            <span class="spec-label">MOQ</span>
-            <span class="spec-val">On request</span>
-          </div>
-          <div class="spec-row">
-            <span class="spec-label">Lead time</span>
-            <span class="spec-val">On request</span>
-          </div>
-        </div>
+      <h1 data-lines>The hide, one step from your studio.</h1>
+      <div class="hero-foot" data-animate="fade-up">
+        <p class="hero-sub">Top-grain napa and full-grain hides, selected and finished to your specification. From
+          tannery floor to studio, no middle layers. Full provenance documentation with every order.</p>
+        <a class="cta" href="#enquire">Request the swatch kit <span class="arrow">&rarr;</span></a>
       </div>
     </div>
-
-    <div class="leathers-foot" data-animate="fade-up">
-      <a class="cta dark" href="#enquire">Request the swatch kit <span class="arrow">&rarr;</span></a>
+    <div class="hero-base" aria-hidden="true">
+      <div class="hero-base-inner">
+        <span>Top-grain napa</span><span class="sep">&middot;</span>
+        <span>Full-grain</span><span class="sep">&middot;</span>
+        <span>Suede &amp; nubuck</span><span class="sep">&middot;</span>
+        <span>Cut to spec</span>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Sections 3-6 build one at a time after approval, per HD_Website_Spec.md build order -->
+  <!-- Sections 2-6 build one at a time after hero approval, per HD_Website_Spec.md build order -->
 
 
-<!-- ======================================================================
+  <!-- ======================================================================
      ENQUIRY FORM & FOOTER
      ====================================================================== -->
-<style>
-  /* Enquiry Form */
-  .enquire-section {
-    padding: 140px 40px;
-    background: var(--espresso);
-    border-top: 1px solid var(--hairline);
-    display: flex;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-  }
-  .enquire-inner {
-    max-width: 640px;
-    width: 100%;
-  }
-  .enquire-header {
-    margin-bottom: 64px;
-  }
-  .enquire-header h2 {
-    font-family: 'Prata', serif;
-    font-weight: 400;
-    font-size: clamp(32px, 5vw, 48px);
-    margin-bottom: 16px;
-  }
-  .enquire-header p {
-    font-size: 16px;
-    color: var(--parchment-dim);
-    line-height: 1.6;
-    max-width: 42ch;
-  }
-  .ha-form {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .form-group label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(246,241,231,0.6);
-  }
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid var(--hairline);
-    color: var(--parchment);
-    font-family: 'Urbanist', sans-serif;
-    font-size: 16px;
-    padding: 8px 0;
-    border-radius: 0;
-    transition: border-color 0.3s ease;
-    -webkit-appearance: none;
-  }
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus {
-    outline: none;
-    border-color: var(--rust);
-  }
-  .form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  .form-group select option {
-    background: var(--espresso-soft);
-    color: var(--parchment);
-  }
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
-  .submit-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--parchment);
-    padding: 0 0 8px 0;
-    border-bottom: 1px solid var(--rust);
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    align-self: flex-start;
-    transition: gap 0.25s ease;
-  }
-  .submit-btn:hover {
-    gap: 22px;
-  }
-  .submit-btn .arrow {
-    color: var(--rust);
-    font-size: 15px;
-    transition: transform 0.25s ease;
-  }
-  /* Footer */
-  .site-footer {
-    border-top: 1px solid var(--hairline);
-    padding: 64px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    text-align: center;
-    background: var(--espresso);
-    position: relative;
-    z-index: 2;
-  }
-  .footer-mark {
-    width: 42px;
-    height: auto;
-    opacity: 0.8;
-  }
-  .footer-text {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(246,241,231,0.45);
-    line-height: 2;
-  }
+  <style>
+    /* Enquiry Form */
+    .enquire-section {
+      padding: 140px 40px;
+      background: var(--espresso);
+      border-top: 1px solid var(--hairline);
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
 
-  @media (max-width: 720px) {
-    .enquire-section { padding: 80px 24px; }
-    .form-row { grid-template-columns: 1fr; gap: 40px; }
-    .site-footer { padding: 48px 24px; }
-  }
-</style>
+    .enquire-inner {
+      max-width: 640px;
+      width: 100%;
+    }
 
-<section class="enquire-section" id="enquire">
-  <div class="enquire-inner">
-    <div class="enquire-header" data-animate="fade-up">
-      <h2>Start a conversation.</h2>
-      <p>Whether you need a swatch kit or are ready to discuss a bulk order, send us your details and we'll be in touch.</p>
-    </div>
-    
-    <form action="https://api.web3forms.com/submit" method="POST" class="ha-form">
-      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-      <input type="hidden" name="subject" value="New Enquiry from Hides Agent">
-      <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-      
-      <div class="form-row">
+    .enquire-header {
+      margin-bottom: 64px;
+    }
+
+    .enquire-header h2 {
+      font-family: 'Prata', serif;
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 16px;
+    }
+
+    .enquire-header p {
+      font-size: 16px;
+      color: var(--parchment-dim);
+      line-height: 1.6;
+      max-width: 42ch;
+    }
+
+    .ha-form {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-group label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(246, 241, 231, 0.6);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--hairline);
+      color: var(--parchment);
+      font-family: 'Urbanist', sans-serif;
+      font-size: 16px;
+      padding: 8px 0;
+      border-radius: 0;
+      transition: border-color 0.3s ease;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--rust);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group select option {
+      background: var(--espresso-soft);
+      color: var(--parchment);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .submit-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      padding: 0 0 8px 0;
+      border-bottom: 1px solid var(--rust);
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      align-self: flex-start;
+      transition: gap 0.25s ease;
+    }
+
+    .submit-btn:hover {
+      gap: 22px;
+    }
+
+    .submit-btn .arrow {
+      color: var(--rust);
+      font-size: 15px;
+      transition: transform 0.25s ease;
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--hairline);
+      padding: 64px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      text-align: center;
+      background: var(--espresso);
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-mark {
+      width: 42px;
+      height: auto;
+      opacity: 0.8;
+    }
+
+    .footer-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(246, 241, 231, 0.45);
+      line-height: 2;
+    }
+
+    @media (max-width: 720px) {
+      .enquire-section {
+        padding: 80px 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .site-footer {
+        padding: 48px 24px;
+      }
+    }
+  </style>
+
+  <section class="enquire-section" id="enquire">
+    <div class="enquire-inner">
+      <div class="enquire-header" data-animate="fade-up">
+        <h2>Start a conversation.</h2>
+        <p>Whether you need a swatch kit or are ready to discuss a bulk order, send us your details and we'll be in
+          touch.</p>
+      </div>
+
+      <form action="https://api.web3forms.com/submit" method="POST" class="ha-form">
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+        <input type="hidden" name="subject" value="New Enquiry from Hides Agent">
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+        <div class="form-row">
+          <div class="form-group" data-animate="fade-up">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group" data-animate="fade-up" data-delay="0.1">
+            <label for="brand">Brand / Company</label>
+            <input type="text" id="brand" name="brand" required>
+          </div>
+        </div>
+
         <div class="form-group" data-animate="fade-up">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required>
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" required>
         </div>
-        <div class="form-group" data-animate="fade-up" data-delay="0.1">
-          <label for="brand">Brand / Company</label>
-          <input type="text" id="brand" name="brand" required>
+
+        <div class="form-group" data-animate="fade-up">
+          <label for="type">Enquiry Type</label>
+          <select id="type" name="type" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="Swatches">Request Swatch Kit</option>
+            <option value="Bulk">Bulk Order</option>
+            <option value="General">General Enquiry</option>
+          </select>
         </div>
-      </div>
-      
-      <div class="form-group" data-animate="fade-up">
-        <label for="email">Email address</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      
-      <div class="form-group" data-animate="fade-up">
-        <label for="type">Enquiry Type</label>
-        <select id="type" name="type" required>
-          <option value="" disabled selected>Select an option</option>
-          <option value="Swatches">Request Swatch Kit</option>
-          <option value="Bulk">Bulk Order</option>
-          <option value="General">General Enquiry</option>
-        </select>
-      </div>
-      
-      <div class="form-group" data-animate="fade-up">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-      </div>
-      
-      <div data-animate="fade-up">
-        <button type="submit" class="submit-btn">Submit Enquiry <span class="arrow">&rarr;</span></button>
-      </div>
-    </form>
-  </div>
-</section>
 
-<footer class="site-footer">
-  <a href="#top" aria-label="Back to top">
-    <svg class="footer-mark" aria-hidden="true" focusable="false" viewBox="93.0 -18.0 693.1 523.9">
-      <use href="#ha-mono"/>
-    </svg>
-  </a>
-  <div class="footer-text">
-    &copy; 2026 Hides Agent<br>
-    Company No. [TBC] &middot; Full provenance documentation provided.<br>
-    <a href="#" style="text-decoration: underline; text-underline-offset: 3px;">Privacy Policy</a>
-  </div>
-</footer>
+        <div class="form-group" data-animate="fade-up">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
 
-<!-- GSAP vendored locally for this demo; swap src to cdnjs for production -->
-<script src="vendor/gsap.min.js"></script>
-<script src="vendor/ScrollTrigger.min.js"></script>
-<script src="js/ha-motion.js"></script>
-<script>
-  HAMotion.init({
-    debug: false,
-    heroSheen: true,
-    // smoothScroll: true,   // Lenis hook, off by default per spec
-  });
-</script>
+        <div data-animate="fade-up">
+          <button type="submit" class="submit-btn">Submit Enquiry <span class="arrow">&rarr;</span></button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <a href="#top" aria-label="Back to top">
+      <svg class="footer-mark" aria-hidden="true" focusable="false" viewBox="93.0 -18.0 693.1 523.9">
+        <use href="#ha-mono" />
+      </svg>
+    </a>
+    <div class="footer-text">
+      &copy; 2026 Hides Agent<br>
+      Company No. [TBC] &middot; Full provenance documentation provided.<br>
+      <a href="#" style="text-decoration: underline; text-underline-offset: 3px;">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- GSAP vendored locally for this demo; swap src to cdnjs for production -->
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="js/ha-motion.js"></script>
+  <script>
+    HAMotion.init({
+      debug: false,
+      heroSheen: true,
+      // smoothScroll: true,   // Lenis hook, off by default per spec
+    });
+
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
+
 </html>
