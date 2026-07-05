@@ -181,70 +181,208 @@
 
 
 <!-- ======================================================================
-     STUB SECTIONS — grey placeholders so the motion system is testable.
-     These are NOT designed sections. Each gets built properly, one per
-     session, after approval. Copy here is structural only.
+     ENQUIRY FORM & FOOTER
      ====================================================================== -->
 <style>
-  .stub{padding:110px 40px; border-top:1px solid var(--hairline); position:relative; overflow:hidden;}
-  .stub .tag{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.25em;
-    text-transform:uppercase; color:rgba(246,241,231,0.35); margin-bottom:34px;}
-  .stub h2{font-family:'Prata',serif; font-weight:400; font-size:clamp(30px,4vw,44px); max-width:16ch;}
-  .stub-list{list-style:none; padding:0; margin:44px 0 0; max-width:760px;}
-  .stub-list li{display:flex; justify-content:space-between; gap:24px; padding:20px 0;
-    border-bottom:1px solid var(--hairline); font-size:15px;}
-  .stub-list li span:last-child{font-family:'JetBrains Mono',monospace; font-size:12px;
-    letter-spacing:0.14em; text-transform:uppercase; color:rgba(246,241,231,0.5);}
-  .stub-panels{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:44px;}
-  .stub-panel{aspect-ratio:4/5; border:1px solid var(--hairline); border-radius:6px;
-    display:flex; align-items:flex-end; padding:16px;
-    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.16em;
-    text-transform:uppercase; color:rgba(246,241,231,0.4);}
-  .stub-steps p{font-family:'Prata',serif; font-size:clamp(24px,3vw,36px); max-width:20ch; margin:0;}
-  @media(max-width:720px){ .stub-panels{grid-template-columns:1fr;} .stub{padding:80px 24px;} }
+  /* Enquiry Form */
+  .enquire-section {
+    padding: 140px 40px;
+    background: var(--espresso);
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .enquire-inner {
+    max-width: 640px;
+    width: 100%;
+  }
+  .enquire-header {
+    margin-bottom: 64px;
+  }
+  .enquire-header h2 {
+    font-family: 'Prata', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 48px);
+    margin-bottom: 16px;
+  }
+  .enquire-header p {
+    font-size: 16px;
+    color: var(--parchment-dim);
+    line-height: 1.6;
+    max-width: 42ch;
+  }
+  .ha-form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .form-group label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(246,241,231,0.6);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--hairline);
+    color: var(--parchment);
+    font-family: 'Urbanist', sans-serif;
+    font-size: 16px;
+    padding: 8px 0;
+    border-radius: 0;
+    transition: border-color 0.3s ease;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--rust);
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .form-group select option {
+    background: var(--espresso-soft);
+    color: var(--parchment);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .submit-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    padding: 0 0 8px 0;
+    border-bottom: 1px solid var(--rust);
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    align-self: flex-start;
+    transition: gap 0.25s ease;
+  }
+  .submit-btn:hover {
+    gap: 22px;
+  }
+  .submit-btn .arrow {
+    color: var(--rust);
+    font-size: 15px;
+    transition: transform 0.25s ease;
+  }
+  /* Footer */
+  .site-footer {
+    border-top: 1px solid var(--hairline);
+    padding: 64px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    text-align: center;
+    background: var(--espresso);
+    position: relative;
+    z-index: 2;
+  }
+  .footer-mark {
+    width: 42px;
+    height: auto;
+    opacity: 0.8;
+  }
+  .footer-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(246,241,231,0.45);
+    line-height: 2;
+  }
+
+  @media (max-width: 720px) {
+    .enquire-section { padding: 80px 24px; }
+    .form-row { grid-template-columns: 1fr; gap: 40px; }
+    .site-footer { padding: 48px 24px; }
+  }
 </style>
 
-<section class="stub" id="supply-stub">
-  <div class="tag" data-animate="fade-up">Stub &middot; Section 2 &middot; awaiting approval</div>
-  <h2 data-animate="fade-up">The leathers.</h2>
-  <ul class="stub-list" data-stagger>
-    <li><span>Top-grain napa</span><span>On request</span></li>
-    <li><span>Full-grain</span><span>On request</span></li>
-    <li><span>Buffalo</span><span>On request</span></li>
-    <li><span>Suede &amp; nubuck</span><span>On request</span></li>
-    <li><span>Split</span><span>On request</span></li>
-  </ul>
-</section>
-
-<section class="stub" id="craft-stub">
-  <div class="tag" data-animate="fade-up">Stub &middot; Section 3 &middot; parallax depth demo</div>
-  <h2 data-animate="fade-up">Selected and finished by hand.</h2>
-  <div class="stub-panels">
-    <div class="stub-panel" data-parallax="0.25"><span>bg layer &middot; 0.25x</span></div>
-    <div class="stub-panel" data-parallax="0.55"><span>mid layer &middot; 0.55x</span></div>
-    <div class="stub-panel" data-parallax="0.9"><span>fg layer &middot; 0.9x</span></div>
+<section class="enquire-section" id="enquire">
+  <div class="enquire-inner">
+    <div class="enquire-header" data-animate="fade-up">
+      <h2>Start a conversation.</h2>
+      <p>Whether you need a swatch kit or are ready to discuss a bulk order, send us your details and we'll be in touch.</p>
+    </div>
+    
+    <form action="https://api.web3forms.com/submit" method="POST" class="ha-form">
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+      <input type="hidden" name="subject" value="New Enquiry from Hides Agent">
+      <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+      
+      <div class="form-row">
+        <div class="form-group" data-animate="fade-up">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group" data-animate="fade-up" data-delay="0.1">
+          <label for="brand">Brand / Company</label>
+          <input type="text" id="brand" name="brand" required>
+        </div>
+      </div>
+      
+      <div class="form-group" data-animate="fade-up">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="form-group" data-animate="fade-up">
+        <label for="type">Enquiry Type</label>
+        <select id="type" name="type" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="Swatches">Request Swatch Kit</option>
+          <option value="Bulk">Bulk Order</option>
+          <option value="General">General Enquiry</option>
+        </select>
+      </div>
+      
+      <div class="form-group" data-animate="fade-up">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      
+      <div data-animate="fade-up">
+        <button type="submit" class="submit-btn">Submit Enquiry <span class="arrow">&rarr;</span></button>
+      </div>
+    </form>
   </div>
 </section>
 
-<section class="stub" data-pin id="process-stub">
-  <div class="tag">Stub &middot; Section 4 &middot; pinned narrative demo</div>
-  <div class="stub-steps" data-pin-steps>
-    <p>01 &mdash; Swatches reach your studio.</p>
-    <p>02 &mdash; A sample is produced to your spec.</p>
-    <p>03 &mdash; Bulk follows, with full provenance documentation.</p>
+<footer class="site-footer">
+  <a href="#top" aria-label="Back to top">
+    <svg class="footer-mark" aria-hidden="true" focusable="false" viewBox="93.0 -18.0 693.1 523.9">
+      <use href="#ha-mono"/>
+    </svg>
+  </a>
+  <div class="footer-text">
+    &copy; 2026 Hides Agent<br>
+    Company No. [TBC] &middot; Full provenance documentation provided.<br>
+    <a href="#" style="text-decoration: underline; text-underline-offset: 3px;">Privacy Policy</a>
   </div>
-</section>
-
-<section class="stub" id="mark-stub" style="text-align:center;">
-  <div class="tag" data-animate="fade-up">Monogram entrance demo</div>
-  <svg data-draw viewBox="93.0 -18.0 693.1 523.9" style="width:200px; height:auto; margin-top:20px;">
-    <style>.d1{fill:#B4500F;}.d2{fill:#F6F1E7;}</style>
-    <use href="#ha-mono"/>
-  </svg>
-</section>
-
-<footer class="stub" style="padding:56px 40px;">
-  <div class="tag">Stub footer &middot; V0.4 motion demo</div>
 </footer>
 
 <!-- GSAP vendored locally for this demo; swap src to cdnjs for production -->

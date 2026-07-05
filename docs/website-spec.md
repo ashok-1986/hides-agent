@@ -33,8 +33,7 @@ until one is picked and recorded here:
 - **(c)** Neither happens soon. Ship hero-only as a holding page with the
   enquiry form live, nothing else.
 
-**Recorded answer: ______________ (blank, not yet answered as of this spec
-version)**
+**Recorded answer: (c) Neither happens soon. Ship hero-only as a holding page with the enquiry form live, nothing else.**
 
 ## Brand
 
