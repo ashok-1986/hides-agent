@@ -91,7 +91,7 @@
     }
 
     .brand .mark {
-      height: 54px;
+      height: 100px;
       width: auto;
       display: block;
     }
@@ -272,7 +272,8 @@
       transform: translateY(26px);
     }
 
-    .craft-section, .process-terms-section {
+    .craft-section,
+    .process-terms-section {
       padding: 120px 40px;
       max-width: 1280px;
       margin: 0 auto;
@@ -295,14 +296,16 @@
         padding: 26px 24px;
       }
 
-      .leathers-section, .craft-section, .process-terms-section {
+      .leathers-section,
+      .craft-section,
+      .process-terms-section {
         padding: 64px 24px;
       }
-      
+
       .process-terms-inner {
         gap: 80px;
       }
-      
+
       .process-grid {
         gap: 48px;
       }
@@ -326,6 +329,11 @@
       .rise {
         opacity: 1 !important;
         transform: none !important;
+      }
+
+      .leather-num,
+      .leather-reveal {
+        transition: none !important;
       }
     }
   </style>
@@ -458,50 +466,73 @@
      SECTION 2: THE LEATHERS
      ====================================================================== -->
   <section class="leathers-section" id="leathers">
-    <div class="leathers-inner">
-      <div class="leathers-header" data-animate="fade-up">
+    <div class="leathers-grid">
+      <div class="leathers-head" data-animate="fade-up">
         <h2 class="leathers-title">The Leathers</h2>
-        <p class="leathers-subtitle">Our core offerings, sourced directly from the tannery floor. Full provenance documentation available on request.</p>
+        <p class="leathers-subtitle">Five grades, sourced direct from the tannery floor. Full provenance
+          documentation with every order.</p>
       </div>
-      <div class="leather-grid" data-stagger>
-        <div class="leather-card">
-          <h3 class="leather-card-title">Top-grain Napa <span class="leather-card-flagship">Flagship</span></h3>
-          <ul class="leather-specs">
-            <li><span>MOQ</span> <span>On request</span></li>
-            <li><span>Lead time</span> <span>On request</span></li>
-          </ul>
-        </div>
-        <div class="leather-card">
-          <h3 class="leather-card-title">Full-grain</h3>
-          <ul class="leather-specs">
-            <li><span>MOQ</span> <span>On request</span></li>
-            <li><span>Lead time</span> <span>On request</span></li>
-          </ul>
-        </div>
-        <div class="leather-card">
-          <h3 class="leather-card-title">Buffalo</h3>
-          <ul class="leather-specs">
-            <li><span>MOQ</span> <span>On request</span></li>
-            <li><span>Lead time</span> <span>On request</span></li>
-          </ul>
-        </div>
-        <div class="leather-card">
-          <h3 class="leather-card-title">Suede &amp; Nubuck</h3>
-          <ul class="leather-specs">
-            <li><span>MOQ</span> <span>On request</span></li>
-            <li><span>Lead time</span> <span>On request</span></li>
-          </ul>
-        </div>
-        <div class="leather-card">
-          <h3 class="leather-card-title">Split</h3>
-          <ul class="leather-specs">
-            <li><span>MOQ</span> <span>On request</span></li>
-            <li><span>Lead time</span> <span>On request</span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="leathers-foot" data-animate="fade-up" style="margin-top: 64px;">
-        <a class="cta cta-dark" href="#enquire">Request specs &amp; pricing <span class="arrow">&rarr;</span></a>
+      <ol class="leathers-index" data-stagger>
+        <li class="leather-row" tabindex="0">
+          <span class="leather-num">01</span>
+          <div>
+            <h3 class="leather-name">Top-grain Napa <span class="leather-flag">Flagship</span></h3>
+            <div class="leather-reveal">
+              <span class="leather-swatch" style="background:#A9764F" aria-hidden="true"></span>
+              <p class="leather-use">Structured bags, wallets, and small leather goods where the surface is the
+                finish.</p>
+              <span class="leather-onreq">Specs &mdash; on request</span>
+            </div>
+          </div>
+        </li>
+        <li class="leather-row" tabindex="0">
+          <span class="leather-num">02</span>
+          <div>
+            <h3 class="leather-name">Full-grain</h3>
+            <div class="leather-reveal">
+              <span class="leather-swatch" style="background:#7B4B2A" aria-hidden="true"></span>
+              <p class="leather-use">Belts and footwear uppers built to develop a patina over years of use.</p>
+              <span class="leather-onreq">Specs &mdash; on request</span>
+            </div>
+          </div>
+        </li>
+        <li class="leather-row" tabindex="0">
+          <span class="leather-num">03</span>
+          <div>
+            <h3 class="leather-name">Buffalo</h3>
+            <div class="leather-reveal">
+              <span class="leather-swatch" style="background:#4A3527" aria-hidden="true"></span>
+              <p class="leather-use">Heavy-duty bags and work goods where abrasion resistance matters most.</p>
+              <span class="leather-onreq">Specs &mdash; on request</span>
+            </div>
+          </div>
+        </li>
+        <li class="leather-row" tabindex="0">
+          <span class="leather-num">04</span>
+          <div>
+            <h3 class="leather-name">Suede &amp; Nubuck</h3>
+            <div class="leather-reveal">
+              <span class="leather-swatch" style="background:#9C8B76" aria-hidden="true"></span>
+              <p class="leather-use">Soft accessories and linings built around texture rather than structure.</p>
+              <span class="leather-onreq">Specs &mdash; on request</span>
+            </div>
+          </div>
+        </li>
+        <li class="leather-row" tabindex="0">
+          <span class="leather-num">05</span>
+          <div>
+            <h3 class="leather-name">Split</h3>
+            <div class="leather-reveal">
+              <span class="leather-swatch" style="background:#C2A67C" aria-hidden="true"></span>
+              <p class="leather-use">Backings and linings for cost-conscious runs where top grain isn't the point.
+              </p>
+              <span class="leather-onreq">Specs &mdash; on request</span>
+            </div>
+          </div>
+        </li>
+      </ol>
+      <div class="leathers-foot" data-animate="fade-up">
+        <a class="cta cta-dark" href="#enquire">Request the swatch kit <span class="arrow">&rarr;</span></a>
       </div>
     </div>
   </section>
@@ -517,15 +548,21 @@
       </div>
       <div class="craft-grid" data-stagger>
         <div class="photo-placeholder">
-          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>" alt="Craft image placeholder 1">
+          <img
+            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>"
+            alt="Craft image placeholder 1">
           <span class="placeholder-label">Awaiting real<br>photography</span>
         </div>
         <div class="photo-placeholder">
-          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>" alt="Craft image placeholder 2">
+          <img
+            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>"
+            alt="Craft image placeholder 2">
           <span class="placeholder-label">Awaiting real<br>photography</span>
         </div>
         <div class="photo-placeholder">
-          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>" alt="Craft image placeholder 3">
+          <img
+            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>"
+            alt="Craft image placeholder 3">
           <span class="placeholder-label">Awaiting real<br>photography</span>
         </div>
       </div>
@@ -537,7 +574,7 @@
      ====================================================================== -->
   <section class="process-terms-section" id="process">
     <div class="process-terms-inner">
-      
+
       <div class="process-block">
         <div class="process-header" data-animate="fade-up">
           <h2 class="section-title">The Process</h2>
@@ -591,95 +628,167 @@
      ENQUIRY FORM & FOOTER
      ====================================================================== -->
   <style>
-    /* Section 2: The Leathers */
+    /* Section 2: The Leathers — editorial index */
     .leathers-section {
-      padding: 96px 40px;
+      padding: 140px 40px;
       background: var(--parchment);
       color: var(--espresso);
       display: flex;
       justify-content: center;
       position: relative;
     }
-    
-    .leathers-inner {
-      max-width: 1200px;
+
+    .leathers-grid {
+      max-width: 1280px;
       width: 100%;
+      display: grid;
+      grid-template-columns: minmax(220px, 300px) 1fr;
+      gap: 64px;
     }
-    
-    .leathers-header {
-      margin-bottom: 64px;
+
+    .leathers-head {
+      align-self: start;
+      position: sticky;
+      top: 160px;
     }
-    
+
     .leathers-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(36px, 5vw, 48px);
+      font-size: clamp(40px, 5.2vw, 64px);
       font-weight: 600;
-      line-height: 1.18;
-      margin-bottom: 16px;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
     }
-    
+
     .leathers-subtitle {
-      font-size: 18px;
+      font-size: 16px;
       color: var(--espresso);
       opacity: 0.7;
-      max-width: 50ch;
+      max-width: 30ch;
       line-height: 1.6;
+      margin-top: 20px;
     }
-    
-    .leather-grid {
+
+    .leathers-index {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-bottom: 1px solid rgba(34, 21, 9, 0.15);
+    }
+
+    .leather-row {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 40px;
-    }
-    
-    .leather-card {
+      grid-template-columns: auto 1fr;
+      align-items: baseline;
+      gap: 28px;
+      padding: 36px 0;
       border-top: 1px solid rgba(34, 21, 9, 0.15);
-      padding-top: 24px;
+      cursor: pointer;
     }
-    
-    .leather-card-title {
+
+    .leather-row:focus-visible {
+      outline: 1.5px solid var(--rust);
+      outline-offset: 6px;
+    }
+
+    .leather-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(40px, 6vw, 80px);
+      line-height: 1;
+      color: rgba(34, 21, 9, 0.16);
+      transition: color 0.4s ease;
+    }
+
+    .leather-row:hover .leather-num,
+    .leather-row:focus-visible .leather-num,
+    .leather-row.is-active .leather-num {
+      color: var(--rust);
+    }
+
+    .leather-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
+      font-size: clamp(26px, 3.4vw, 40px);
       font-weight: 600;
-      margin-bottom: 24px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 16px;
     }
-    
-    .leather-card-flagship {
+
+    .leather-flag {
+      font-family: 'JetBrains Mono', monospace;
+      font-style: normal;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rust);
+      border-bottom: 1px solid var(--rust);
+      padding-bottom: 2px;
+    }
+
+    .leather-reveal {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 18px;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .leather-row:hover .leather-reveal,
+    .leather-row:focus-visible .leather-reveal,
+    .leather-row.is-active .leather-reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .leather-swatch {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border: 1px solid rgba(34, 21, 9, 0.15);
+    }
+
+    .leather-use {
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: var(--espresso);
+      opacity: 0.75;
+      max-width: 34ch;
+    }
+
+    .leather-onreq {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--rust);
-      background: rgba(180, 80, 15, 0.1);
-      padding: 4px 8px;
-      border-radius: 4px;
-    }
-    
-    .leather-specs {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.05em;
       color: var(--espresso);
-      opacity: 0.7;
-      list-style: none;
-      padding: 0;
-      margin: 0;
+      opacity: 0.4;
+      margin-left: auto;
+      white-space: nowrap;
     }
-    
-    .leather-specs li {
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(34, 21, 9, 0.05);
-      display: flex;
-      justify-content: space-between;
+
+    .leathers-foot {
+      margin-top: 64px;
     }
-    
-    .leather-specs li:last-child {
-      border-bottom: none;
+
+    @media (max-width: 900px) {
+      .leathers-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .leathers-head {
+        position: static;
+      }
+
+      .leather-onreq {
+        margin-left: 0;
+      }
     }
-    
+
     .cta.cta-dark {
       color: var(--espresso);
     }
@@ -692,7 +801,7 @@
       line-height: 1.18;
       margin-bottom: 16px;
     }
-    
+
     .section-subtitle {
       font-size: 18px;
       color: var(--espresso);
@@ -710,22 +819,22 @@
       justify-content: center;
       position: relative;
     }
-    
+
     .craft-inner {
       max-width: 1200px;
       width: 100%;
     }
-    
+
     .craft-header {
       margin-bottom: 64px;
     }
-    
+
     .craft-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 40px;
     }
-    
+
     .photo-placeholder {
       position: relative;
       display: block;
@@ -733,7 +842,7 @@
       background: rgba(34, 21, 9, 0.04);
       overflow: hidden;
     }
-    
+
     .photo-placeholder img {
       display: block;
       width: 100%;
@@ -741,7 +850,7 @@
       aspect-ratio: 4 / 5;
       object-fit: cover;
     }
-    
+
     .placeholder-label {
       position: absolute;
       inset: 0;
@@ -770,7 +879,7 @@
       position: relative;
       border-top: 1px solid rgba(34, 21, 9, 0.15);
     }
-    
+
     .process-terms-inner {
       max-width: 1200px;
       width: 100%;
@@ -778,22 +887,23 @@
       flex-direction: column;
       gap: 120px;
     }
-    
-    .process-header, .terms-header {
+
+    .process-header,
+    .terms-header {
       margin-bottom: 48px;
     }
-    
+
     .process-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 64px;
     }
-    
+
     .process-step {
       display: flex;
       flex-direction: column;
     }
-    
+
     .step-num {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
@@ -801,21 +911,21 @@
       color: var(--rust);
       margin-bottom: 16px;
     }
-    
+
     .step-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 28px;
       font-weight: 600;
       margin-bottom: 16px;
     }
-    
+
     .step-desc {
       font-size: 16px;
       line-height: 1.6;
       color: var(--espresso);
       opacity: 0.8;
     }
-    
+
     .terms-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -824,13 +934,13 @@
       border-top: 1px solid rgba(34, 21, 9, 0.15);
       padding-top: 32px;
     }
-    
+
     .term-item {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    
+
     .term-label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
@@ -839,14 +949,14 @@
       opacity: 0.6;
       text-transform: uppercase;
     }
-    
+
     .term-value {
       font-family: 'Urbanist', sans-serif;
       font-size: 20px;
       font-weight: 500;
       color: var(--espresso);
     }
-    
+
     .provenance-note {
       font-size: 16px;
       line-height: 1.6;
@@ -864,7 +974,7 @@
       line-height: 1.18;
       margin-bottom: 16px;
     }
-    
+
     .section-subtitle {
       font-size: 18px;
       color: var(--espresso);
@@ -882,22 +992,22 @@
       justify-content: center;
       position: relative;
     }
-    
+
     .craft-inner {
       max-width: 1200px;
       width: 100%;
     }
-    
+
     .craft-header {
       margin-bottom: 64px;
     }
-    
+
     .craft-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 40px;
     }
-    
+
     .photo-placeholder {
       position: relative;
       display: block;
@@ -905,7 +1015,7 @@
       background: rgba(34, 21, 9, 0.04);
       overflow: hidden;
     }
-    
+
     .photo-placeholder img {
       display: block;
       width: 100%;
@@ -913,7 +1023,7 @@
       aspect-ratio: 4 / 5;
       object-fit: cover;
     }
-    
+
     .placeholder-label {
       position: absolute;
       inset: 0;
@@ -942,7 +1052,7 @@
       position: relative;
       border-top: 1px solid rgba(34, 21, 9, 0.15);
     }
-    
+
     .process-terms-inner {
       max-width: 1200px;
       width: 100%;
@@ -950,22 +1060,23 @@
       flex-direction: column;
       gap: 120px;
     }
-    
-    .process-header, .terms-header {
+
+    .process-header,
+    .terms-header {
       margin-bottom: 48px;
     }
-    
+
     .process-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 64px;
     }
-    
+
     .process-step {
       display: flex;
       flex-direction: column;
     }
-    
+
     .step-num {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
@@ -973,21 +1084,21 @@
       color: var(--rust);
       margin-bottom: 16px;
     }
-    
+
     .step-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 28px;
       font-weight: 600;
       margin-bottom: 16px;
     }
-    
+
     .step-desc {
       font-size: 16px;
       line-height: 1.6;
       color: var(--espresso);
       opacity: 0.8;
     }
-    
+
     .terms-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -996,13 +1107,13 @@
       border-top: 1px solid rgba(34, 21, 9, 0.15);
       padding-top: 32px;
     }
-    
+
     .term-item {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    
+
     .term-label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
@@ -1011,14 +1122,14 @@
       opacity: 0.6;
       text-transform: uppercase;
     }
-    
+
     .term-value {
       font-family: 'Urbanist', sans-serif;
       font-size: 20px;
       font-weight: 500;
       color: var(--espresso);
     }
-    
+
     .provenance-note {
       font-size: 16px;
       line-height: 1.6;
@@ -1027,7 +1138,7 @@
       border-left: 2px solid var(--rust);
       padding-left: 16px;
     }
-    
+
     /* Enquiry Form */
     .enquire-section {
       padding: 140px 40px;
@@ -1187,6 +1298,7 @@
       display: inline-block;
       transition: color 0.2s ease;
     }
+
     .back-to-top:hover {
       color: var(--rust);
     }
@@ -1200,6 +1312,7 @@
       position: relative;
       z-index: 2;
     }
+
     .privacy-inner {
       max-width: 640px;
       width: 100%;
@@ -1210,14 +1323,17 @@
     }
 
     @media (max-width: 720px) {
-      .leathers-section, .craft-section, .process-terms-section {
+
+      .leathers-section,
+      .craft-section,
+      .process-terms-section {
         padding: 64px 24px;
       }
-      
+
       .process-terms-inner {
         gap: 80px;
       }
-      
+
       .process-grid {
         gap: 48px;
       }
@@ -1290,7 +1406,9 @@
 
   <section class="privacy-note" id="privacy">
     <div class="privacy-inner">
-      <p><strong>Privacy:</strong> We collect your name, company, email, and message solely to respond to your enquiry. This data goes directly to our email and is not stored on this site. To request deletion of your information, simply reply to any email we send you. We do not use cookies for tracking.</p>
+      <p><strong>Privacy:</strong> We collect your name, company, email, and message solely to respond to your enquiry.
+        This data goes directly to our email and is not stored on this site. To request deletion of your information,
+        simply reply to any email we send you. We do not use cookies for tracking.</p>
     </div>
   </section>
 
@@ -1321,6 +1439,26 @@
       } else {
         header.classList.remove('scrolled');
       }
+    });
+
+    // Section 2: tap/keyboard toggle for the leather-swatch reveal.
+    // Hover already reveals it on desktop via CSS; this covers touch and
+    // keyboard users, one row open at a time.
+    document.querySelectorAll('.leather-row').forEach((row) => {
+      const toggle = () => {
+        const willOpen = !row.classList.contains('is-active');
+        document.querySelectorAll('.leather-row.is-active').forEach((r) => {
+          if (r !== row) r.classList.remove('is-active');
+        });
+        row.classList.toggle('is-active', willOpen);
+      };
+      row.addEventListener('click', toggle);
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
     });
   </script>
 </body>
