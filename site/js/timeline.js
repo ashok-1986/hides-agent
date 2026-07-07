@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!nodeEl) return;
       
       const angle = ((index / total) * 360 + rotationAngle) % 360;
-      const radius = 180;
+      const radius = window.innerWidth < 600 ? 120 : 180;
       const radian = (angle * Math.PI) / 180;
       
       const x = radius * Math.cos(radian) + centerOffset.x;

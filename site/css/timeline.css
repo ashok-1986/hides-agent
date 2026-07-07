@@ -295,3 +295,16 @@
 @keyframes rtPing {
   75%, 100% { transform: scale(2); opacity: 0; }
 }
+
+@media (max-width: 600px) {
+  .rt-orbit-ring {
+    width: 240px;
+    height: 240px;
+  }
+  .rt-card {
+    width: clamp(220px, 85vw, 256px);
+  }
+  .timeline-wrapper {
+    min-height: 500px;
+  }
+}
