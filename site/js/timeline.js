@@ -162,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (item.relatedIds.length > 0) {
       const btns = item.relatedIds.map(rid => {
         const rItem = timelineData.find(i => i.id === rid);
+        if (!rItem) return "";
         return `<button class="rt-related-btn" data-id="${rid}" onmousedown="event.stopPropagation(); window.toggleRelated(${rid})">${rItem.title} <i data-lucide="arrow-right" class="rt-sm-icon"></i></button>`;
       }).join("");
       
@@ -239,9 +240,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Animation Loop
-  function tick() {
+  let lastTime = performance.now();
+  function tick(timestamp) {
+    const delta = timestamp - lastTime;
+    lastTime = timestamp;
+    
     if (autoRotate) {
-      rotationAngle = (rotationAngle + 0.2) % 360;
+      rotationAngle = (rotationAngle + 0.012 * delta) % 360;
       updateNodes();
     }
     requestAnimationFrame(tick);
