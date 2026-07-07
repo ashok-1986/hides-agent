@@ -11,6 +11,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Urbanist:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="css/timeline.css">
   <style>
     :root {
       --espresso: #221509;
@@ -574,27 +575,12 @@
   <section class="process-terms-section" id="process">
     <div class="process-terms-inner">
 
-      <div class="process-block">
+      <div class="process-block timeline-wrapper" id="timeline-app">
         <div class="process-header" data-animate="fade-up">
           <h2 class="section-title">The Process</h2>
         </div>
-        <div class="process-grid" data-stagger>
-          <div class="process-step">
-            <span class="step-num">01</span>
-            <h3 class="step-title">Swatches</h3>
-            <p class="step-desc">Review our core range in person to verify quality, texture, and colour accuracy.</p>
-          </div>
-          <div class="process-step">
-            <span class="step-num">02</span>
-            <h3 class="step-title">Sample</h3>
-            <p class="step-desc">Order a sample hide for your first prototype before committing to volume.</p>
-          </div>
-          <div class="process-step">
-            <span class="step-num">03</span>
-            <h3 class="step-title">Bulk</h3>
-            <p class="step-desc">Consistent production supply delivered direct from the tannery to your studio.</p>
-          </div>
-        </div>
+        <!-- Radial Orbital Timeline will be injected here by timeline.js -->
+        <div id="radial-timeline" class="radial-timeline"></div>
       </div>
 
       <div class="terms-block">
@@ -1302,6 +1288,10 @@
       });
     });
   </script>
+  <!-- Timeline Logic -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="js/timeline.js"></script>
 </body>
 
 </html>
