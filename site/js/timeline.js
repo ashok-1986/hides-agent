@@ -83,12 +83,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const nodesContainer = document.getElementById("rt-nodes-container");
   
-  // Render nodes
-  function renderNodes() {
+  // Initialize nodes once
+  function initNodes() {
     nodesContainer.innerHTML = "";
-    const total = timelineData.length;
+    timelineData.forEach((item) => {
+      const nodeEl = document.createElement("div");
+      nodeEl.className = "rt-node";
+      nodeEl.setAttribute("data-id", item.id);
+      
+      // Use mousedown to ensure it fires even if rotating fast, though we no longer destroy elements
+      nodeEl.addEventListener("mousedown", (e) => {
+        e.stopPropagation();
+        toggleItem(item.id);
+      });
+      
+      nodesContainer.appendChild(nodeEl);
+      updateNodeContent(item.id);
+    });
+  }
+
+  function updateNodeContent(id) {
+    const item = timelineData.find(t => t.id === id);
+    const nodeEl = nodesContainer.querySelector(`.rt-node[data-id="${id}"]`);
+    if (!nodeEl) return;
     
+    const isExpanded = !!expandedItems[id];
+    const isRelated = activeNodeId && timelineData.find(t => t.id === activeNodeId)?.relatedIds.includes(id);
+    const isPulsing = !!pulseEffect[id];
+    
+    let nodeClass = "rt-node";
+    if (isExpanded) nodeClass += " expanded";
+    else if (isRelated) nodeClass += " related";
+    nodeEl.className = nodeClass;
+    
+    nodeEl.innerHTML = `
+      ${isPulsing ? `<div class="rt-node-pulse" style="width:${item.energy*0.5+40}px; height:${item.energy*0.5+40}px; left:-${(item.energy*0.5)/2}px; top:-${(item.energy*0.5)/2}px;"></div>` : ''}
+      <div class="rt-icon-wrapper">
+        <i data-lucide="${item.icon}" style="width:16px;height:16px;"></i>
+      </div>
+      <div class="rt-node-title">${item.title}</div>
+      ${isExpanded ? renderCard(item) : ''}
+    `;
+    
+    if (window.lucide) {
+      window.lucide.createIcons({ root: nodeEl });
+    }
+  }
+
+  // Render nodes (called every frame)
+  function updateNodes() {
+    const total = timelineData.length;
     timelineData.forEach((item, index) => {
+      const nodeEl = nodesContainer.querySelector(`.rt-node[data-id="${item.id}"]`);
+      if (!nodeEl) return;
+      
       const angle = ((index / total) * 360 + rotationAngle) % 360;
       const radius = 180;
       const radian = (angle * Math.PI) / 180;
@@ -99,40 +147,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const opacity = Math.max(0.4, Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2)));
       
       const isExpanded = !!expandedItems[item.id];
-      const isRelated = activeNodeId && timelineData.find(t => t.id === activeNodeId)?.relatedIds.includes(item.id);
-      const isPulsing = !!pulseEffect[item.id];
       
-      let nodeClass = "rt-node";
-      if (isExpanded) nodeClass += " expanded";
-      else if (isRelated) nodeClass += " related";
-      
-      const nodeEl = document.createElement("div");
-      nodeEl.className = nodeClass;
       nodeEl.style.transform = `translate(${x}px, ${y}px)`;
       nodeEl.style.zIndex = isExpanded ? 200 : zIndex;
       nodeEl.style.opacity = isExpanded ? 1 : opacity;
-      
-      nodeEl.innerHTML = `
-        ${isPulsing ? `<div class="rt-node-pulse" style="width:${item.energy*0.5+40}px; height:${item.energy*0.5+40}px; left:-${(item.energy*0.5)/2}px; top:-${(item.energy*0.5)/2}px;"></div>` : ''}
-        <div class="rt-icon-wrapper">
-          <i data-lucide="${item.icon}" style="width:16px;height:16px;"></i>
-        </div>
-        <div class="rt-node-title">${item.title}</div>
-        ${isExpanded ? renderCard(item) : ''}
-      `;
-      
-      nodeEl.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleItem(item.id);
-      });
-      
-      nodesContainer.appendChild(nodeEl);
     });
-    
-    // Re-initialize Lucide icons for new DOM elements
-    if (window.lucide) {
-      window.lucide.createIcons();
-    }
   }
 
   function renderCard(item) {
@@ -143,11 +162,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (item.relatedIds.length > 0) {
       const btns = item.relatedIds.map(rid => {
         const rItem = timelineData.find(i => i.id === rid);
-        return `<button class="rt-related-btn" data-id="${rid}">${rItem.title} <i data-lucide="arrow-right" class="rt-sm-icon"></i></button>`;
+        return `<button class="rt-related-btn" data-id="${rid}" onmousedown="event.stopPropagation(); window.toggleRelated(${rid})">${rItem.title} <i data-lucide="arrow-right" class="rt-sm-icon"></i></button>`;
       }).join("");
       
       relatedHtml = `
-        <div class="rt-card-section">
+        <div class="rt-card-section" onmousedown="event.stopPropagation()">
           <div class="rt-card-section-title"><i data-lucide="link" class="rt-sm-icon"></i> Connected Nodes</div>
           <div class="rt-related-btns">${btns}</div>
         </div>
@@ -155,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     return `
-      <div class="rt-card" onclick="event.stopPropagation()">
+      <div class="rt-card" onmousedown="event.stopPropagation()">
         <div class="rt-card-line"></div>
         <div class="rt-card-header">
           <span class="rt-badge ${statusClass}">${statusText}</span>
@@ -175,6 +194,11 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
+  // Global function for related buttons since we inject via HTML string
+  window.toggleRelated = function(rid) {
+    toggleItem(rid);
+  };
+
   function centerViewOnNode(nodeId) {
     const nodeIndex = timelineData.findIndex((item) => item.id === nodeId);
     const totalNodes = timelineData.length;
@@ -184,13 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function toggleItem(id) {
     if (expandedItems[id]) {
-      // Close it
       expandedItems = {};
       activeNodeId = null;
       pulseEffect = {};
       autoRotate = true;
     } else {
-      // Open it
       expandedItems = { [id]: true };
       activeNodeId = id;
       autoRotate = false;
@@ -201,38 +223,32 @@ document.addEventListener("DOMContentLoaded", () => {
       
       centerViewOnNode(id);
     }
-    renderNodes();
-    attachRelatedListeners();
+    // Update content for all nodes to reflect new state
+    timelineData.forEach(t => updateNodeContent(t.id));
+    updateNodes();
   }
 
-  function attachRelatedListeners() {
-    document.querySelectorAll('.rt-related-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleItem(parseInt(btn.getAttribute('data-id')));
-      });
-    });
-  }
-
-  container.addEventListener("click", (e) => {
+  container.addEventListener("mousedown", (e) => {
     if (e.target.closest('.rt-card') || e.target.closest('.rt-icon-wrapper')) return;
     expandedItems = {};
     activeNodeId = null;
     pulseEffect = {};
     autoRotate = true;
-    renderNodes();
+    timelineData.forEach(t => updateNodeContent(t.id));
+    updateNodes();
   });
 
   // Animation Loop
   function tick() {
     if (autoRotate) {
       rotationAngle = (rotationAngle + 0.2) % 360;
-      renderNodes();
+      updateNodes();
     }
     requestAnimationFrame(tick);
   }
   
-  // Initial render
-  renderNodes();
+  // Initial setup
+  initNodes();
+  updateNodes();
   requestAnimationFrame(tick);
 });
