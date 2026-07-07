@@ -430,13 +430,12 @@
   </header>
 
   <section class="hero" id="top">
-    <video class="hero-bg" id="heroVideo" src="img/hero_video.mp4" poster="img/hero-banner.png" muted loop playsinline
-      preload="auto" aria-hidden="true"></video>
+    <video class="hero-bg" id="heroVideo" src="img/hero_video.mp4" poster="img/hero-banner.png" muted loop playsinline preload="auto" aria-hidden="true"></video>
     <script>
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const hv = document.getElementById('heroVideo');
         hv.setAttribute('autoplay', '');
-        hv.play().catch(() => { });
+        hv.play().catch(()=>{});
       }
     </script>
     <div class="hero-sheen" id="sheen" aria-hidden="true"></div>
@@ -471,6 +470,9 @@
         <h2 class="leathers-title">The Leathers</h2>
         <p class="leathers-subtitle">Five grades, sourced direct from the tannery floor. Full provenance
           documentation with every order.</p>
+        <div class="leathers-foot" data-animate="fade-up">
+          <a class="cta cta-dark" href="#enquire">Request the swatch kit <span class="arrow">&rarr;</span></a>
+        </div>
       </div>
       <ol class="leathers-index" data-stagger>
         <li class="leather-row" tabindex="0">
@@ -531,9 +533,6 @@
           </div>
         </li>
       </ol>
-      <div class="leathers-foot" data-animate="fade-up">
-        <a class="cta cta-dark" href="#enquire">Request the swatch kit <span class="arrow">&rarr;</span></a>
-      </div>
     </div>
   </section>
 
