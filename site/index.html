@@ -545,24 +545,36 @@
         <h2 class="section-title">The Craft</h2>
         <p class="section-subtitle">Precision tanning and finishing, controlled at every step.</p>
       </div>
-      <div class="craft-grid" data-stagger>
-        <div class="photo-placeholder">
-          <img
-            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>"
-            alt="Craft image placeholder 1">
-          <span class="placeholder-label">Awaiting real<br>photography</span>
+      <div class="napa-journey" data-stagger>
+        <div class="journey-step">
+          <div class="journey-photo">
+            <span class="placeholder-label">Awaiting real<br>photography</span>
+          </div>
+          <div class="journey-text">
+            <span class="step-label">Step 01 &middot; Selection</span>
+            <h3>Raw Material Sourcing</h3>
+            <p>Only the top 10% of raw hides pass initial inspection, ensuring the intrinsic structural integrity required for flagship napa. We prioritize pristine surfaces to avoid heavy corrective buffing.</p>
+          </div>
         </div>
-        <div class="photo-placeholder">
-          <img
-            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>"
-            alt="Craft image placeholder 2">
-          <span class="placeholder-label">Awaiting real<br>photography</span>
+        <div class="journey-step reverse">
+          <div class="journey-photo">
+            <span class="placeholder-label">Awaiting real<br>photography</span>
+          </div>
+          <div class="journey-text">
+            <span class="step-label">Step 02 &middot; Tanning</span>
+            <h3>Chrome-Free Processing</h3>
+            <p>Our controlled tanning cycle balances supple hand-feel with dimensional stability. Precise drumming times yield a consistent temper across the entire hide, minimizing edge waste.</p>
+          </div>
         </div>
-        <div class="photo-placeholder">
-          <img
-            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><rect width='100%' height='100%' fill='none'/></svg>"
-            alt="Craft image placeholder 3">
-          <span class="placeholder-label">Awaiting real<br>photography</span>
+        <div class="journey-step">
+          <div class="journey-photo">
+            <span class="placeholder-label">Awaiting real<br>photography</span>
+          </div>
+          <div class="journey-text">
+            <span class="step-label">Step 03 &middot; Finishing</span>
+            <h3>Aniline Polish</h3>
+            <p>A light, breathable finish preserves the natural grain and pore structure. The surface is treated to resist minor abrasions while maintaining the authentic, buttery touch of premium napa.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -836,44 +848,102 @@
       margin-bottom: 64px;
     }
 
-    .craft-grid {
+    .napa-journey {
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+    }
+
+    .journey-step {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
     }
 
-    .photo-placeholder {
-      position: relative;
-      display: block;
-      border: 1px solid var(--espresso);
-      background: rgba(34, 21, 9, 0.04);
-      overflow: hidden;
+    .journey-step.reverse {
+      direction: rtl;
     }
 
-    .photo-placeholder img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
+    .journey-step.reverse > * {
+      direction: ltr;
     }
 
-    .placeholder-label {
-      position: absolute;
-      inset: 0;
+    .journey-photo {
+      aspect-ratio: 4 / 3;
+      background: var(--espresso);
+      border: 1px solid rgba(34, 21, 9, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .journey-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+
+    .placeholder-label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--espresso);
-      opacity: 0.5;
-      padding: 20px;
+      color: rgba(246, 241, 231, 0.5);
       line-height: 1.6;
-      pointer-events: none;
+    }
+
+    .journey-text {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 480px;
+    }
+
+    .step-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+
+    .journey-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .journey-text p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--espresso);
+      opacity: 0.8;
+    }
+
+    @media (max-width: 900px) {
+      .napa-journey {
+        gap: 80px;
+      }
+      .journey-step {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .journey-step.reverse {
+        direction: ltr;
+      }
+      .journey-text {
+        max-width: 100%;
+      }
     }
 
     /* Sections 4 & 5: Process & Terms */
