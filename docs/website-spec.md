@@ -156,3 +156,15 @@ Rule: one section per session, each session ends committed or deployed.
 Multi-page site, CMS, video hero until real footage exists, client portal,
 multilingual, e-commerce checkout, CRM integration (revisit after real
 enquiries start arriving).
+
+## Roadmap, v2 (confirmed direction, not in scope until v1 proves itself)
+
+- **Per-type leather journeys.** One page or section per leather type
+  (top-grain napa, full-grain, buffalo, suede/nubuck, split), each showing
+  its own raw-to-finished story, not just a features row. Confirmed as a
+  good idea, July 2026. Deliberately not built now: v1 ships one flagship
+  journey (napa) in Craft, the rest stay as sharper one-line descriptions
+  in The Leathers. Revisit once the six-section site has real traffic and
+  photography exists for more than one type. Building five journeys before
+  one is proven would repeat the exact scope mistake this spec has avoided
+  everywhere else.
