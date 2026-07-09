@@ -141,7 +141,7 @@ Rule: one section per session, each session ends committed or deployed.
       samples from this site?" Their answers settle any future animation
       or design-direction debate. If this doesn't happen in the window,
       it gets called out as a broken commitment, not quietly forgotten.
-- [ ] Live-site defects from July 2026 audit fixed: "[TBC]" company line
+- [x] Live-site defects from July 2026 audit fixed: "[TBC]" company line
       removed from public footer, dead Privacy Policy link replaced with
       the real 5-line note, stray #top anchor fixed.
 - [ ] Companies House registration complete, number in footer.

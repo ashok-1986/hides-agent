@@ -1,0 +1,44 @@
+@theme {
+  /* Colors */
+  --color-espresso: #2A1B10;
+  --color-espresso-hero: #221509;
+  --color-parchment: #F6F1E7;
+  --color-rust-logo: #A84000;
+  --color-rust-screen: #B4500F;
+  --color-saddle: #C0956A;
+  --color-tannin: #4A5240;
+  --color-brass: #E8C038; /* print/foil reference only, never on screen */
+
+  /* Typography */
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-urbanist: 'Urbanist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Typography — Scale */
+  --text-hero: clamp(46px, 7.4vw, 104px);
+  --text-section: clamp(30px, 4vw, 44px);
+  --text-body: 16px;
+  --text-eyebrow: 11.5px;
+  --text-data: 13.5px;
+
+  /* Spacing, 8px grid */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-64: 64px;
+  --spacing-96: 96px;
+
+  /* Border Radius, restrained on purpose, no full-pill radii in this system */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+}
+
+/* This file is a placeholder for a future Tailwind v4 migration.
+   The current build is static HTML/CSS/vanilla JS per CLAUDE.md, no
+   Tailwind is in use yet. Do not add a Tailwind build step without
+   updating CLAUDE.md's tech-stack section first, that's a stack change,
+   not a token change. */

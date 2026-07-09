@@ -30,24 +30,37 @@ the **HA monogram**, files under `assets/logo/`.
   and ask the human directly. Do not invent grade names, MOQ numbers, or lead
   times to keep moving.
 
-## Brand tokens (unchanged since the rename, do not alter without asking)
+## Brand tokens
+
+Canonical source is now `tokens.json`, `variables.css`, and `theme.css` in
+the repo root, not the inline block that used to live here. Those three
+files replace every ad hoc `:root` block scattered across earlier HTML
+files. If a session needs a design value, it comes from `variables.css`,
+nowhere else. Quick reference:
 
 ```css
 :root {
-  --espresso: #221509;   /* current hero uses this darker espresso */
-  --parchment: #F6F1E7;
-  --rust: #B4500F;       /* current hero rust, brighter than the logo's rust for dark-ground contrast */
-  --rust-logo: #A84000;  /* the logo file's own rust, used only inside the SVGs */
-  --saddle: #C0956A;     /* decorative only, fails text contrast, never use for type */
-  --tannin: #4A5240;
+  --color-espresso-hero: #221509;  /* dark section background */
+  --color-parchment: #F6F1E7;      /* light section background */
+  --color-rust-screen: #B4500F;    /* on-screen accent, dark grounds */
+  --color-rust-logo: #A84000;      /* inside the SVG logo files only */
+  --color-saddle: #C0956A;         /* decorative only, fails text contrast */
+  --color-tannin: #4A5240;         /* reserved, sparing use */
+  --color-brass: #E8C038;          /* print/foil only, never on screen */
 }
 ```
 
-- Fonts: Cormorant Garamond (display/headlines), Urbanist 400/500/600 (body, UI), JetBrains
-  Mono 400 (specs, data, labels). Loaded via Google Fonts in the current
-  build. Cormorant Garamond is a stand-in for TAN Mignon if that licence is ever bought
-  later, keep the font-family declaration in one place so swapping it later
-  is a one-line change.
+- Fonts: Cormorant Garamond (display/headlines, weight 600), Urbanist
+  400/500/600 (body, UI), JetBrains Mono 400 (specs, data, labels). Loaded
+  via Google Fonts. Cormorant Garamond replaced Prata as of this update,
+  chosen for a cleaner, simpler headline feel. TAN Mignon licence still not
+  purchased, revisit if that changes. Keep the font-family declaration in
+  one place so any future swap is a one-line change.
+- Headline line-height is 1.18, not tighter. Cormorant Garamond has
+  generous ascenders and descenders, a tight line-height clips words like
+  "your" and "step" in a multi-line hero. This was a real bug, fixed once,
+  do not tighten it back down without testing full sentences, not single
+  words.
 - Buttons and CTAs in the current hero are hairline underlines, not filled
   pills. That restraint is deliberate, keep it for future sections unless
   told otherwise.
@@ -80,6 +93,12 @@ Hard rules the system already enforces, do not weaken them:
 - `data-count` only fires on real numbers. Never wire a counter to a
   placeholder or invented figure.
 - Transform and opacity only, nothing animates width, height, or layout.
+- `data-lines` (the word-by-word masked reveal) is reserved for the hero
+  H1 only. It is the one flourish the whole page gets. Every other
+  section heading uses plain `data-animate="fade-up"`, no word masking.
+  Repeating the hero's signature move on every section heading is what
+  makes a page feel templated, that was a real bug, not a style choice,
+  found in July 2026 and fixed here permanently.
 
 ## Content rules (ethics, not style)
 

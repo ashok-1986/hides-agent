@@ -1,0 +1,63 @@
+:root {
+  /* Colors */
+  --color-espresso: #2A1B10;
+  --color-espresso-hero: #221509;
+  --color-parchment: #F6F1E7;
+  --color-rust-logo: #A84000;
+  --color-rust-screen: #B4500F;
+  --color-saddle: #C0956A;
+  --color-tannin: #4A5240;
+  --color-brass: #E8C038; /* print/foil reference only, never on screen */
+
+  /* Typography — Font Families */
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-urbanist: 'Urbanist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Typography — Scale */
+  --text-hero: clamp(46px, 7.4vw, 104px);
+  --leading-hero: 1.18;
+  --text-section: clamp(30px, 4vw, 44px);
+  --leading-section: 1.18;
+  --text-body: 16px;
+  --leading-body: 1.6;
+  --text-eyebrow: 11.5px;
+  --tracking-eyebrow: 0.22em;
+  --text-data: 13.5px;
+  --leading-data: 1.4;
+
+  /* Font weights, this brand never uses bold beyond 600 */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Spacing, 8px grid, no off-grid values permitted */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-64: 64px;  /* mobile section padding */
+  --spacing-96: 96px;  /* desktop section padding, minimum */
+
+  /* Layout */
+  --page-max-width: 1280px;
+  --section-padding-desktop: var(--spacing-96);
+  --section-padding-mobile: var(--spacing-64);
+
+  /* Border Radius — deliberately restrained, no stadium pills on this brand */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* Surfaces */
+  --surface-parchment: #F6F1E7;
+  --surface-parchment-deep: #EFE6D3;
+  --surface-espresso: #221509;
+
+  /* Motion durations, ceilings not defaults, see CLAUDE.md motion rules */
+  --duration-ui: 250ms;
+  --duration-entrance: 700ms;
+  --duration-decorative: 1400ms; /* hero only */
+}

@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hides Agent</title>
+  <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/ha-motion.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,14 +13,7 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Urbanist:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
     rel="stylesheet">
   <style>
-    :root {
-      --espresso: #221509;
-      --espresso-soft: #2E1E10;
-      --parchment: #F6F1E7;
-      --parchment-dim: rgba(246, 241, 231, 0.62);
-      --rust: #B4500F;
-      --hairline: rgba(246, 241, 231, 0.16);
-    }
+    /* Design tokens are loaded from css/variables.css */
 
     * {
       box-sizing: border-box;
@@ -31,9 +25,9 @@
     }
 
     body {
-      background: var(--espresso);
-      color: var(--parchment);
-      font-family: 'Urbanist', sans-serif;
+      background: var(--color-espresso-hero);
+      color: var(--color-parchment);
+      font-family: var(--font-urbanist);
       -webkit-font-smoothing: antialiased;
     }
 
@@ -43,7 +37,7 @@
     }
 
     a:focus-visible {
-      outline: 1.5px solid var(--rust);
+      outline: 1.5px solid var(--color-rust-screen);
       outline-offset: 4px;
     }
 
@@ -97,7 +91,7 @@
     }
 
     .wordmark {
-      font-family: 'Urbanist', sans-serif;
+      font-family: var(--font-urbanist);
       font-weight: 500;
       font-size: 13px;
       letter-spacing: 0.42em;
@@ -105,23 +99,23 @@
     }
 
     .wordmark .dot {
-      color: var(--rust);
+      color: var(--color-rust-screen);
     }
 
     .nav-enquire {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 12px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--parchment-dim);
-      border-bottom: 1px solid var(--hairline);
+      color: rgba(246, 241, 231, 0.62);
+      border-bottom: 1px solid rgba(246, 241, 231, 0.16);
       padding-bottom: 3px;
       transition: color .2s ease, border-color .2s ease;
     }
 
     .nav-enquire:hover {
-      color: var(--parchment);
-      border-color: var(--rust);
+      color: var(--color-parchment);
+      border-color: var(--color-rust-screen);
     }
 
     .hero {
@@ -169,19 +163,19 @@
     .hero-rule .line {
       width: 56px;
       height: 1px;
-      background: var(--rust);
+      background: var(--color-rust-screen);
     }
 
     .hero-rule span {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 11.5px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--parchment-dim);
+      color: rgba(246, 241, 231, 0.62);
     }
 
     h1 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-cormorant);
       font-weight: 600;
       font-size: clamp(46px, 7.4vw, 104px);
       line-height: 1.18;
@@ -194,7 +188,7 @@
     }
 
     h1 .rust-stop {
-      color: var(--rust);
+      color: var(--color-rust-screen);
     }
 
     .hero-foot {
@@ -210,7 +204,7 @@
       font-size: 16px;
       font-weight: 400;
       line-height: 1.7;
-      color: var(--parchment-dim);
+      color: rgba(246, 241, 231, 0.62);
       max-width: 38ch;
     }
 
@@ -218,13 +212,13 @@
       display: inline-flex;
       align-items: center;
       gap: 14px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 12.5px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--parchment);
+      color: var(--color-parchment);
       padding-bottom: 8px;
-      border-bottom: 1px solid var(--rust);
+      border-bottom: 1px solid var(--color-rust-screen);
       transition: gap .25s ease;
       min-height: 44px;
       align-items: center;
@@ -235,7 +229,7 @@
     }
 
     .cta .arrow {
-      color: var(--rust);
+      color: var(--color-rust-screen);
       font-size: 15px;
       transition: transform .25s ease;
     }
@@ -245,7 +239,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      border-top: 1px solid var(--hairline);
+      border-top: 1px solid rgba(246, 241, 231, 0.16);
     }
 
     .hero-base-inner {
@@ -255,7 +249,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -263,7 +257,7 @@
     }
 
     .hero-base-inner .sep {
-      color: var(--rust);
+      color: var(--color-rust-screen);
     }
 
     /* entrance handled in JS with reduced-motion respect */
@@ -286,7 +280,7 @@
     }
 
     .section-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-cormorant);
       font-size: 48px;
       margin-bottom: 40px;
     }
@@ -642,8 +636,8 @@
     /* Section 2: The Leathers — editorial index */
     .leathers-section {
       padding: 140px 40px;
-      background: var(--parchment);
-      color: var(--espresso);
+      background: var(--color-parchment);
+      color: var(--color-espresso-hero);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -667,7 +661,7 @@
     }
 
     .leathers-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-cormorant);
       font-size: clamp(40px, 5.2vw, 64px);
       font-weight: 600;
       line-height: 1.05;
@@ -676,7 +670,7 @@
 
     .leathers-subtitle {
       font-size: 16px;
-      color: var(--espresso);
+      color: var(--color-espresso-hero);
       opacity: 0.7;
       max-width: 30ch;
       line-height: 1.6;
@@ -701,12 +695,12 @@
     }
 
     .leather-row:focus-visible {
-      outline: 1.5px solid var(--rust);
+      outline: 1.5px solid var(--color-rust-screen);
       outline-offset: 6px;
     }
 
     .leather-num {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: clamp(40px, 6vw, 80px);
       line-height: 1;
       color: rgba(34, 21, 9, 0.16);
@@ -716,11 +710,11 @@
     .leather-row:hover .leather-num,
     .leather-row:focus-visible .leather-num,
     .leather-row.is-active .leather-num {
-      color: var(--rust);
+      color: var(--color-rust-screen);
     }
 
     .leather-name {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-cormorant);
       font-size: clamp(26px, 3.4vw, 40px);
       font-weight: 600;
       display: flex;
@@ -730,13 +724,13 @@
     }
 
     .leather-flag {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-style: normal;
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--rust);
-      border-bottom: 1px solid var(--rust);
+      color: var(--color-rust-screen);
+      border-bottom: 1px solid var(--color-rust-screen);
       padding-bottom: 2px;
     }
 
@@ -770,17 +764,17 @@
     .leather-use {
       font-size: 14.5px;
       line-height: 1.5;
-      color: var(--espresso);
+      color: var(--color-espresso-hero);
       opacity: 0.75;
       max-width: 34ch;
     }
 
     .leather-onreq {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--espresso);
+      color: var(--color-espresso-hero);
       opacity: 0.4;
       margin-left: auto;
       white-space: nowrap;
@@ -806,12 +800,12 @@
     }
 
     .cta.cta-dark {
-      color: var(--espresso);
+      color: var(--color-espresso-hero);
     }
 
     /* Sections 3-5: Shared */
     .section-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-cormorant);
       font-size: clamp(36px, 5vw, 48px);
       font-weight: 600;
       line-height: 1.18;
@@ -820,7 +814,7 @@
 
     .section-subtitle {
       font-size: 18px;
-      color: var(--espresso);
+      color: var(--color-espresso-hero);
       opacity: 0.7;
       max-width: 50ch;
       line-height: 1.6;
@@ -829,8 +823,8 @@
     /* Section 3: Craft */
     .craft-section {
       padding: 96px 40px;
-      background: var(--parchment);
-      color: var(--espresso);
+      background: var(--color-parchment);
+      color: var(--color-espresso-hero);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -871,7 +865,7 @@
 
     .journey-photo {
       aspect-ratio: 4 / 3;
-      background: var(--espresso);
+      background: var(--color-espresso-hero);
       border: 1px solid rgba(34, 21, 9, 0.15);
       display: flex;
       align-items: center;
@@ -892,7 +886,7 @@
     }
 
     .placeholder-label {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -908,15 +902,15 @@
     }
 
     .step-label {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 11.5px;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--rust);
+      color: var(--color-rust-screen);
     }
 
     .journey-text h3 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-cormorant);
       font-size: clamp(32px, 4vw, 48px);
       font-weight: 600;
       line-height: 1.1;
@@ -926,7 +920,7 @@
     .journey-text p {
       font-size: 16px;
       line-height: 1.7;
-      color: var(--espresso);
+      color: var(--color-espresso-hero);
       opacity: 0.8;
     }
 
@@ -949,8 +943,8 @@
     /* Sections 4 & 5: Process & Terms */
     .process-terms-section {
       padding: 96px 40px;
-      background: var(--parchment);
-      color: var(--espresso);
+      background: var(--color-parchment);
+      color: var(--color-espresso-hero);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -985,15 +979,15 @@
     }
 
     .step-num {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 12px;
       letter-spacing: 0.1em;
-      color: var(--rust);
+      color: var(--color-rust-screen);
       margin-bottom: 16px;
     }
 
     .step-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--font-cormorant);
       font-size: 28px;
       font-weight: 600;
       margin-bottom: 16px;
@@ -1002,7 +996,7 @@
     .step-desc {
       font-size: 16px;
       line-height: 1.6;
-      color: var(--espresso);
+      color: var(--color-espresso-hero);
       opacity: 0.8;
     }
 
@@ -1022,27 +1016,27 @@
     }
 
     .term-label {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 12px;
       letter-spacing: 0.05em;
-      color: var(--espresso);
+      color: var(--color-espresso-hero);
       opacity: 0.6;
       text-transform: uppercase;
     }
 
     .term-value {
-      font-family: 'Urbanist', sans-serif;
+      font-family: var(--font-urbanist);
       font-size: 20px;
       font-weight: 500;
-      color: var(--espresso);
+      color: var(--color-espresso-hero);
     }
 
     .provenance-note {
       font-size: 16px;
       line-height: 1.6;
-      color: var(--espresso);
+      color: var(--color-espresso-hero);
       opacity: 0.8;
-      border-left: 2px solid var(--rust);
+      border-left: 2px solid var(--color-rust-screen);
       padding-left: 16px;
     }
 
@@ -1050,8 +1044,8 @@
     /* Enquiry Form */
     .enquire-section {
       padding: 140px 40px;
-      background: var(--espresso);
-      border-top: 1px solid var(--hairline);
+      background: var(--color-espresso-hero);
+      border-top: 1px solid rgba(246, 241, 231, 0.16);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1071,7 +1065,8 @@
     }
 
     .enquire-header h2 {
-      font-family: 'Prata', serif;
+      font-family: var(--font-cormorant);
+      line-height: var(--leading-section);
       font-weight: 400;
       font-size: clamp(32px, 5vw, 48px);
       margin-bottom: 16px;
@@ -1079,7 +1074,7 @@
 
     .enquire-header p {
       font-size: 16px;
-      color: var(--parchment-dim);
+      color: rgba(246, 241, 231, 0.62);
       line-height: 1.6;
       max-width: 42ch;
     }
@@ -1097,7 +1092,7 @@
     }
 
     .form-group label {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -1109,9 +1104,9 @@
     .form-group select {
       background: transparent;
       border: none;
-      border-bottom: 1px solid var(--hairline);
-      color: var(--parchment);
-      font-family: 'Urbanist', sans-serif;
+      border-bottom: 1px solid rgba(246, 241, 231, 0.16);
+      color: var(--color-parchment);
+      font-family: var(--font-urbanist);
       font-size: 16px;
       padding: 8px 0;
       border-radius: 0;
@@ -1123,7 +1118,7 @@
     .form-group textarea:focus,
     .form-group select:focus {
       outline: none;
-      border-color: var(--rust);
+      border-color: var(--color-rust-screen);
     }
 
     .form-group textarea {
@@ -1132,8 +1127,8 @@
     }
 
     .form-group select option {
-      background: var(--espresso-soft);
-      color: var(--parchment);
+      background: #2E1E10;
+      color: var(--color-parchment);
     }
 
     .form-row {
@@ -1146,13 +1141,13 @@
       background: transparent;
       border: none;
       cursor: pointer;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 12.5px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--parchment);
+      color: var(--color-parchment);
       padding: 0 0 8px 0;
-      border-bottom: 1px solid var(--rust);
+      border-bottom: 1px solid var(--color-rust-screen);
       display: inline-flex;
       align-items: center;
       gap: 14px;
@@ -1165,21 +1160,21 @@
     }
 
     .submit-btn .arrow {
-      color: var(--rust);
+      color: var(--color-rust-screen);
       font-size: 15px;
       transition: transform 0.25s ease;
     }
 
     /* Footer */
     .site-footer {
-      border-top: 1px solid var(--hairline);
+      border-top: 1px solid rgba(246, 241, 231, 0.16);
       padding: 64px 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 32px;
       text-align: center;
-      background: var(--espresso);
+      background: var(--color-espresso-hero);
       position: relative;
       z-index: 2;
     }
@@ -1191,7 +1186,7 @@
     }
 
     .footer-text {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 10.5px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -1200,7 +1195,7 @@
     }
 
     .back-to-top {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -1211,12 +1206,12 @@
     }
 
     .back-to-top:hover {
-      color: var(--rust);
+      color: var(--color-rust-screen);
     }
 
     /* Privacy Note */
     .privacy-note {
-      background: var(--espresso);
+      background: var(--color-espresso-hero);
       padding: 0 40px 64px 40px;
       display: flex;
       justify-content: center;
