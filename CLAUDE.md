@@ -81,11 +81,12 @@ nowhere else. Quick reference:
 
 The animation system is built and tested, not a spec to reinvent. It lives at
 `site/js/ha-motion.js` plus `site/css/ha-motion.css`. Read
-`docs/motion-integration.md` before adding any new animation. Use its
-data-attribute API (`data-animate`, `data-stagger`, `data-parallax`,
-`data-lines`, `data-draw`, `data-count`, `data-pin`) rather than writing new
-GSAP calls by hand. If a new section needs motion the API doesn't cover,
-extend the system, don't bypass it with inline scripts.
+`docs/website-blueprint.md` for the per-element-type motion rules (which
+attribute goes on headings vs lists vs images vs numbers) before building
+any new section. Use its data-attribute API (`data-animate`, `data-stagger`,
+`data-parallax`, `data-lines`, `data-draw`, `data-count`, `data-pin`) rather
+than writing new GSAP calls by hand. If a new section needs motion the API
+doesn't cover, extend the system, don't bypass it with inline scripts.
 
 Hard rules the system already enforces, do not weaken them:
 - `prefers-reduced-motion: reduce` disables everything, content still shows.
@@ -117,7 +118,11 @@ Hard rules the system already enforces, do not weaken them:
   session ends deployed or at least committed. Do not start section N+1 with
   section N unfinished.
 - Before coding, restate in two lines what this session ships. After coding,
-  check mobile 375px, desktop 1440px, keyboard-only use, reduced-motion.
+  check mobile 375px, desktop 1440px, wide desktop 2560px, keyboard-only
+  use, reduced-motion. The wide-desktop check was added July 2026 after a
+  full-bleed section shipped past 1440px review with a real width bug
+  invisible at that size and obvious on a larger monitor. Screenshot
+  2560px specifically for any full-bleed or edge-to-edge element.
 - Never commit secrets. Turnstile and email-provider keys live in environment
   config, not in the repo.
 

@@ -41,6 +41,12 @@
       outline-offset: 4px;
     }
 
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
     /* grain of the hide, pure CSS, no imagery */
     .grain {
       position: fixed;
@@ -181,7 +187,6 @@
       line-height: 1.18;
       letter-spacing: 0.005em;
       max-width: 13ch;
-      /* pressed into the hide: dark upper bevel, faint lower catchlight */
       text-shadow:
         0 -1px 1px rgba(0, 0, 0, 0.55),
         0 1px 0 rgba(246, 241, 231, 0.10);
@@ -260,29 +265,9 @@
       color: var(--color-rust-screen);
     }
 
-    /* entrance handled in JS with reduced-motion respect */
     .rise {
       opacity: 0;
       transform: translateY(26px);
-    }
-
-    .craft-section,
-    .process-terms-section {
-      padding: 120px 40px;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 60px;
-    }
-
-    .section-title {
-      font-family: var(--font-cormorant);
-      font-size: 48px;
-      margin-bottom: 40px;
     }
 
     @media (max-width: 720px) {
@@ -377,46 +362,11 @@
         <svg class="mark" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 880.2 713.79">
           <style>
-            .cls-1 {
-              fill: #a84000;
-            }
-
-            .cls-2 {
-              fill: #F6F1E7;
-            }
+            .cls-1 { fill: #a84000; }
+            .cls-2 { fill: #F6F1E7; }
           </style>
-          <path d="M122.8,204.78c.13-.05.27-.1.4-.15v-.04c-.13.06-.27.12-.4.19Z" />
-          <g>
-            <g>
-              <path class="cls-1"
-                d="M768.9,425.25c0,24.65-19.98,44.64-44.64,44.64-59.21-2.35-59.19-86.93,0-89.27,24.65,0,44.63,19.98,44.63,44.64Z" />
-              <path class="cls-2"
-                d="M655.69,425.72l1.02,2.89L481.09,12.61,414.17.35c37.9,17.85,23.99,66.06-8.6,125.58V12.26L351.66,0v213.86c-4.68,7.2-9.39,14.43-14.1,21.66l-172.36-.49V85.82l-53.91-10.51v352.68l53.91,10.51v-189.63l160.5,4.92c-59.71,92.28-112.83,181.81-68.99,216.56,24.96,16.73,59,5.74,94.94-17.71v26.13l53.91,10.51v-78.8c54.63-48.58,105.4-108.45,127.22-126.5l56.68,135.49c14.41,34.47,121.75,59.05,140.23,59.3-30.71-1.68-62.21-23.71-74.01-53.07ZM405.57,399.32c-17.08,14.26-32.66,25.38-44.89,30.44-32.15,20.28-77.05-4.38-77.2-43.98,2.46-114.62,137.48-225.55,158.69-337.58l89.08,232.1c-31.81,29.06-83.31,83.66-125.68,119.03Z" />
-            </g>
-            <g>
-              <g>
-                <path class="cls-2"
-                  d="M659.99,652.01c-10.04-18.49-25.36-20.6-25.36-20.6l-68.67-12.91,14.57-11.1c22.62,10.89,49.64,1.8,60.42-20.37,10.8-22.23,1.19-49.17-21.47-60.19-3.68-1.79-7.48-2.99-11.3-3.75h49.9v-1.34h-62.24v.59c-15.45,1.16-29.79,10.07-36.95,24.8-10.62,21.85-1.48,48.21,20.35,59.57l-19.26,14.67.06.06-4.66,3.5c-2.34-2.03-4.21-4.51-5.11-7.07l.23.65-40.48-96.77h-14.33c26.22,12.34-57.28,89-35.58,106.21,16.98,11.38,52.59-34.01,62.39-42.11l12.81,30.61c2.66,6.36,8.14,10.94,14.63,12.56l-.37.27s13.15,2.69,30.94,6.48c-.95.27-1.9.54-2.87.83-13.23,4-30.78,11.35-39.28,23.7-5.09,7.39-6.45,15.81-4.07,25,5.48,21.17,30.36,28.48,51.91,28.48,1.65,0,3.28-.04,4.88-.12,22.93-1.19,47.33-10.59,57.67-26.81,6.18-5.86,19.03-20.51,11.24-34.84ZM560.03,547.69c7.01-14.42,30.55-17.42,52.58-6.72,22.03,10.71,34.21,31.07,27.21,45.49-7.01,14.42-30.55,17.42-52.58,6.71-22.03-10.71-34.21-31.07-27.2-45.49ZM483.6,618.78c-7.53,4.63-17.36-1.1-17.44-9.94-.22-23.96,31.86-52.83,35.86-76.29l20.13,52.45c-10.08,9.21-28.93,29.79-38.55,33.78ZM652.32,674.21l-.14-.02c-.15.99-.36,1.95-.6,2.9-.87,2.87-2,5.47-3.04,7.54-9.46,16.77-34.25,26.5-57.53,27.7-21.99,1.13-49.72-5.34-55.42-27.35-2.28-8.81-.98-16.85,3.87-23.91,9-13.09,28.61-20.6,43.98-24.67,15.1,3.23,33.06,7.14,49.08,10.86,19.94,4.62,22.01,16.83,19.8,26.95Z" />
-                <path class="cls-2"
-                  d="M650.26,576.16c0-6.64,1.05-13.09,3.16-19.36,2.11-6.27,5.29-11.93,9.56-16.99,4.27-5.06,9.72-9.06,16.35-12.01,6.64-2.95,14.43-4.42,23.39-4.42s16.2,1.82,22.99,5.45c6.79,3.63,12.17,8.53,16.12,14.69,3.95,6.16,5.93,13.14,5.93,20.94,0,1.69-.11,3.5-.32,5.45-.21,1.95-.58,3.61-1.11,4.98-.53,1.37-1.21,2.05-2.05,2.05h-82.01c.1,9.16,1.34,16.88,3.71,23.15,2.37,6.27,5.55,11.3,9.56,15.09,4,3.79,8.45,6.53,13.35,8.22,4.9,1.69,9.88,2.53,14.93,2.53,5.58,0,10.95-.84,16.12-2.53,5.16-1.68,9.61-3.95,13.35-6.79,3.74-2.84,6.24-5.95,7.51-9.32l4.27,1.58c-4.32,6.74-10.06,12.22-17.22,16.43-7.16,4.21-15.64,6.32-25.44,6.32-8.32,0-15.72-1.56-22.2-4.66-6.48-3.11-11.96-7.32-16.43-12.64-4.48-5.32-7.85-11.27-10.11-17.86-2.27-6.58-3.4-13.35-3.4-20.3ZM662.42,573h73.95c.53-4.42.76-8.37.71-11.85-.05-3.48-.58-7.14-1.58-10.98-1-3.84-2.71-7.51-5.14-10.98-2.42-3.48-5.85-6.32-10.27-8.53-4.42-2.21-10.17-3.32-17.22-3.32-6.22,0-11.77,1.26-16.67,3.79-4.9,2.53-9.06,5.95-12.48,10.27-3.42,4.32-6.08,9.19-7.98,14.62-1.9,5.43-3,11.09-3.32,16.99Z" />
-                <path class="cls-2"
-                  d="M758.33,564.47c0-5.27.02-10.53.08-15.8.05-5.27-.26-10.01-.95-14.22-.69-4.21-2.08-7.37-4.19-9.48h16.12v85.8c1.68-3.05,3.71-7.27,6.08-12.64,2.37-5.37,5.03-11.35,7.98-17.93,2.95-6.58,6.19-13.19,9.72-19.83,3.53-6.64,7.24-12.74,11.14-18.33,3.9-5.58,8-10.09,12.32-13.51,4.32-3.42,8.74-5.14,13.27-5.14,4,0,6.95,1.16,8.85,3.48,1.9,2.32,3.16,5.53,3.79,9.64.63,4.11.95,8.95.95,14.54v39.5c0,5.27-.03,10.53-.08,15.8-.05,5.27.26,10.01.95,14.22.68,4.21,2.08,7.37,4.19,9.48h-21.17c2.11-2.11,3.5-5.27,4.19-9.48.68-4.21,1-8.95.95-14.22-.05-5.27-.08-10.53-.08-15.8v-48.03c0-2.32-.21-4.21-.63-5.69-.42-1.47-1.21-2.79-2.37-3.95-1.16-1.16-2.84-1.74-5.06-1.74-3.48,0-7.01,1.82-10.59,5.45-3.58,3.63-7.19,8.43-10.82,14.38-3.63,5.95-7.16,12.51-10.59,19.67-3.42,7.16-6.72,14.33-9.88,21.49-3.16,7.16-6.08,13.72-8.77,19.67-2.69,5.95-5.03,10.74-7.03,14.38-2,3.63-3.63,5.45-4.9,5.45-1.37,0-2.29-.61-2.77-1.82-.47-1.21-.71-2.45-.71-3.71v-61.62Z" />
-                <path class="cls-2"
-                  d="M849.6,549.59c2.68-.33,5.08-1.57,7.21-3.7,2.13-2.13,3.97-4.7,5.52-7.71,1.55-3.01,2.72-6,3.51-8.97.79-2.97,1.19-5.46,1.19-7.46h.5v26.47h7.78v1.88h-7.78v68.36c0,1.5.21,3.12.63,4.83.42,1.71,1.13,3.18,2.13,4.39,1,1.21,2.38,1.82,4.14,1.82,1.09,0,2.05-.13,2.89-.38.83-.25,1.67-.54,2.51-.88l.38,1.13c-2.34,1.5-5.02,2.26-8.03,2.26-2.18,0-4.31-.65-6.4-1.94-2.09-1.3-3.81-3.26-5.14-5.9-1.34-2.63-2.01-5.96-2.01-9.97v-63.72h-9.03v-.5Z" />
-              </g>
-              <path class="cls-1" d="M95.67,540.17v-18.43h18.43v18.43h-18.43Z" />
-              <path class="cls-2"
-                d="M64.24,521.74h12.53v104.45h-12.53v-49.69H12.53v49.69H0v-104.45h12.53v42.23h51.7v-42.23Z" />
-              <path class="cls-2"
-                d="M133,626.19v-104.45h34.54c7.21,0,13.98,1.36,20.29,4.07,6.32,2.71,11.86,6.47,16.64,11.26,4.77,4.8,8.52,10.35,11.23,16.64,2.71,6.29,4.07,13.04,4.07,20.26s-1.36,13.96-4.07,20.26c-2.71,6.29-6.45,11.84-11.23,16.64-4.78,4.8-10.32,8.55-16.64,11.26-6.32,2.71-13.08,4.07-20.29,4.07h-34.54ZM145.53,613.66h22.01c5.47,0,10.61-1.03,15.41-3.1,4.8-2.06,9.01-4.91,12.65-8.54s6.48-7.85,8.54-12.65c2.06-4.8,3.1-9.93,3.1-15.41s-1.03-10.61-3.1-15.41c-2.06-4.8-4.92-9.01-8.58-12.65-3.66-3.63-7.87-6.48-12.65-8.54-4.77-2.06-9.9-3.1-15.37-3.1h-22.01v79.38Z" />
-              <path class="cls-2"
-                d="M238.66,626.19v-104.45h64.09v12.53h-51.55v29.69h42.23v12.53h-42.23v37.15h51.55v12.53h-64.09Z" />
-              <path class="cls-2"
-                d="M359.92,629.77c-5.62,0-11.04-.88-16.26-2.65-5.22-1.76-9.79-4.29-13.69-7.57-3.91-3.28-6.68-7.19-8.32-11.71l11.71-4.4c.99,2.79,2.85,5.21,5.56,7.27,2.71,2.07,5.91,3.67,9.59,4.81,3.68,1.14,7.48,1.72,11.41,1.72,4.48,0,8.64-.73,12.5-2.2,3.85-1.47,6.98-3.52,9.36-6.15,2.39-2.64,3.58-5.72,3.58-9.25s-1.24-6.6-3.73-8.92c-2.49-2.31-5.67-4.15-9.55-5.52-3.88-1.37-7.93-2.42-12.16-3.17-7.21-1.19-13.67-2.9-19.36-5.11-5.7-2.21-10.2-5.31-13.5-9.29-3.31-3.98-4.96-9.22-4.96-15.74,0-6.07,1.75-11.36,5.26-15.89,3.51-4.52,8.14-8.03,13.91-10.52,5.77-2.49,11.99-3.73,18.65-3.73,5.52,0,10.88.86,16.08,2.57,5.2,1.72,9.78,4.21,13.76,7.5,3.98,3.28,6.84,7.29,8.58,12.01l-11.86,4.33c-1-2.84-2.85-5.28-5.56-7.35-2.71-2.06-5.89-3.66-9.55-4.77-3.66-1.12-7.47-1.68-11.45-1.68-4.43-.05-8.56.67-12.38,2.16-3.83,1.49-6.94,3.56-9.33,6.19-2.39,2.64-3.58,5.7-3.58,9.18,0,4.18,1.11,7.37,3.32,9.59,2.21,2.21,5.23,3.87,9.06,4.96,3.83,1.09,8.13,2.06,12.91,2.91,6.76,1.14,13.03,2.95,18.8,5.41,5.77,2.46,10.41,5.73,13.91,9.81,3.51,4.08,5.26,9.1,5.26,15.07s-1.75,11.37-5.26,15.89c-3.51,4.53-8.14,8.03-13.91,10.52-5.77,2.49-12.04,3.73-18.8,3.73Z" />
-            </g>
-          </g>
+          <use href="#ha-mono"></use>
         </svg>
-        <!-- <span class="wordmark">Hides<span class="dot">&nbsp;&middot;&nbsp;</span>Agent</span> -->
       </a>
       <a class="nav-enquire" href="#enquire">Enquire</a>
     </nav>
@@ -454,9 +404,6 @@
     </div>
   </section>
 
-  <!-- ======================================================================
-     SECTION 2: THE LEATHERS
-     ====================================================================== -->
   <section class="leathers-section" id="leathers">
     <div class="leathers-grid">
       <div class="leathers-head" data-animate="fade-up">
@@ -529,9 +476,6 @@
     </div>
   </section>
 
-  <!-- ======================================================================
-     SECTION 3: CRAFT
-     ====================================================================== -->
   <section class="craft" id="craft">
     <div class="wrap">
       <div class="craft-head" data-animate="fade-up">
@@ -567,38 +511,37 @@
     </div>
   </section>
 
-  <!-- ======================================================================
-     SECTION 4 & 5: PROCESS & TERMS
-     ====================================================================== -->
   <section class="process-terms-section" id="process">
     <div class="process-terms-inner">
 
       <div class="process-block">
         <div class="process-header" data-animate="fade-up">
-          <h2 class="section-title">The Process</h2>
+          <div class="eyebrow">The Process</div>
+          <h2 class="section-title">From swatch to shelf, in three steps.</h2>
         </div>
         <div class="process-grid" data-stagger>
           <div class="process-step">
             <span class="step-num">01</span>
             <h3 class="step-title">Swatches</h3>
-            <p class="step-desc">Review our core range in person to verify quality, texture, and colour accuracy.</p>
+            <p class="step-desc">Hold the grain before you commit to it. A swatch kit of all five leathers, sent to your studio.</p>
           </div>
           <div class="process-step">
             <span class="step-num">02</span>
             <h3 class="step-title">Sample</h3>
-            <p class="step-desc">Order a sample hide for your first prototype before committing to volume.</p>
+            <p class="step-desc">One hide, cut and finished to your spec, before a single unit goes to volume.</p>
           </div>
           <div class="process-step">
             <span class="step-num">03</span>
             <h3 class="step-title">Bulk</h3>
-            <p class="step-desc">Consistent production supply delivered direct from the tannery to your studio.</p>
+            <p class="step-desc">The same hide, every time. Production runs shipped direct, no reorder surprises.</p>
           </div>
         </div>
       </div>
 
       <div class="terms-block">
         <div class="terms-header" data-animate="fade-up">
-          <h2 class="section-title">Terms</h2>
+          <div class="eyebrow">Terms</div>
+          <h2 class="section-title">Numbers move with the order, not a price list.</h2>
         </div>
         <div class="terms-grid" data-stagger>
           <div class="term-item">
@@ -622,11 +565,7 @@
     </div>
   </section>
 
-  <!-- ======================================================================
-     ENQUIRY FORM & FOOTER
-     ====================================================================== -->
   <style>
-    /* Section 2: The Leathers — editorial index */
     .leathers-section {
       padding: 140px 40px;
       background: var(--color-parchment);
@@ -796,7 +735,6 @@
       color: var(--color-espresso-hero);
     }
 
-    /* Sections 3-5: Shared */
     .section-title {
       font-family: var(--font-cormorant);
       font-size: clamp(36px, 5vw, 48px);
@@ -813,11 +751,23 @@
       line-height: 1.6;
     }
 
-    /* Section 3: Craft (Generative) */
-    .craft { padding: 96px 0; }
+    /* Section 3: Craft (Generative)
+       Fix: this section needs its own light background. It was authored
+       assuming a parchment page (see craft-head/craft-note text colours,
+       both dark-on-light), but had no background of its own, so it was
+       inheriting body's dark espresso and rendering that text invisible. */
+    .craft {
+      padding: 96px 0;
+      background: var(--color-parchment);
+      color: var(--color-espresso-hero);
+    }
     .craft-head { max-width: 640px; margin-bottom: 56px; }
     .craft-head p { margin-top: 16px; font-size: 16px; line-height: 1.6; color: rgba(34,21,9,0.8); max-width: 520px; }
-    
+    .craft .eyebrow {
+      font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--color-rust-logo);
+    }
+
     .panel-stage {
       position: relative; width: 100vw; margin-left: calc(50% - 50vw);
       height: 64vh; min-height: 420px; max-height: 640px;
@@ -841,18 +791,25 @@
     }
     .panel.raw .panel-caption { left: 24px; }
     .panel.finished .panel-caption { right: 24px; text-align: right; }
-    
+
     .craft-note {
       margin-top: 28px; max-width: 640px; font-size: 14px; line-height: 1.6; color: rgba(34,21,9,0.7);
     }
     .craft-note strong { color: var(--color-espresso-hero); font-weight: 600; }
-    
+
     @media(max-width: 720px) {
       .craft { padding: 64px 0; }
       .panel-stage { height: 48vh; min-height: 320px; }
     }
 
-    /* Sections 4 & 5: Process & Terms */
+    /* Sections 4 & 5: Process & Terms
+       Fix: removed a stray earlier rule that set max-width:1280px and
+       margin:0 auto directly on .process-terms-section. That rule was
+       never overridden by this block (different properties), so the
+       section's own background was capped to 1280px wide and centred,
+       showing body's dark background on both sides on any viewport
+       wider than that. This block is now the single source for this
+       selector's layout. */
     .process-terms-section {
       padding: 96px 40px;
       background: var(--color-parchment);
@@ -952,8 +909,6 @@
       padding-left: 16px;
     }
 
-
-    /* Enquiry Form */
     .enquire-section {
       padding: 140px 40px;
       background: var(--color-espresso-hero);
@@ -978,7 +933,7 @@
 
     .enquire-header h2 {
       font-family: var(--font-cormorant);
-      line-height: var(--leading-section);
+      line-height: 1.18;
       font-weight: 400;
       font-size: clamp(32px, 5vw, 48px);
       margin-bottom: 16px;
@@ -1077,7 +1032,6 @@
       transition: transform 0.25s ease;
     }
 
-    /* Footer */
     .site-footer {
       border-top: 1px solid rgba(246, 241, 231, 0.16);
       padding: 64px 40px;
@@ -1121,7 +1075,6 @@
       color: var(--color-rust-screen);
     }
 
-    /* Privacy Note */
     .privacy-note {
       background: var(--color-espresso-hero);
       padding: 0 40px 64px 40px;
@@ -1173,9 +1126,9 @@
   <section class="enquire-section" id="enquire">
     <div class="enquire-inner">
       <div class="enquire-header" data-animate="fade-up">
+        <div class="eyebrow">Get in touch</div>
         <h2>Start a conversation.</h2>
-        <p>Whether you need a swatch kit or are ready to discuss a bulk order, send us your details and we'll be in
-          touch.</p>
+        <p>Swatch kit or a bulk quote, tell us which. We reply within one working day.</p>
       </div>
 
       <form action="https://api.web3forms.com/submit" method="POST" class="ha-form">
@@ -1238,7 +1191,6 @@
     </div>
   </footer>
 
-  <!-- GSAP vendored locally for this demo; swap src to cdnjs for production -->
   <script src="vendor/gsap.min.js"></script>
   <script src="vendor/ScrollTrigger.min.js"></script>
   <script src="js/ha-motion.js"></script>
@@ -1246,7 +1198,6 @@
     HAMotion.init({
       debug: false,
       heroSheen: true,
-      // smoothScroll: true,   // Lenis hook, off by default per spec
     });
 
     const header = document.querySelector('header');
@@ -1258,9 +1209,6 @@
       }
     });
 
-    // Section 2: tap/keyboard toggle for the leather-swatch reveal.
-    // Hover already reveals it on desktop via CSS; this covers touch and
-    // keyboard users, one row open at a time.
     document.querySelectorAll('.leather-row').forEach((row) => {
       const toggle = () => {
         const willOpen = !row.classList.contains('is-active');
@@ -1280,9 +1228,6 @@
   </script>
 
   <script>
-  /* ---------------------------------------------------------------------
-     Generative leather-grain material study.
-     ------------------------------------------------------------------- */
   (function () {
     function mulberry32(seed) {
       return function () {
@@ -1292,7 +1237,7 @@
         return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
       };
     }
-  
+
     const PALETTE = {
       saddle: [192, 149, 106], espresso: [42, 27, 16],
       rust: [168, 64, 0], rustScreen: [180, 80, 15],
@@ -1300,7 +1245,7 @@
     };
     function rgba(c, a) { return `rgba(${c[0]},${c[1]},${c[2]},${a})`; }
     function lerp(a, b, t) { return a + (b - a) * t; }
-  
+
     function drawGrain(canvas, seed, mode) {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -1308,19 +1253,19 @@
       const ctx = canvas.getContext('2d');
       ctx.scale(dpr, dpr);
       const rand = mulberry32(seed);
-  
+
       ctx.fillStyle = '#221509';
       ctx.fillRect(0, 0, w, h);
-  
+
       const raw = mode === 'raw';
       const cellCount = raw ? 140 : 220;
       const sizeMin = raw ? 10 : 6, sizeMax = raw ? 46 : 16;
       const jitter = raw ? 1 : 0.25;
-  
+
       const cols = Math.ceil(Math.sqrt(cellCount * (w / h)));
       const rows = Math.ceil(cellCount / cols);
       const cw = w / cols, ch = h / rows;
-  
+
       for (let i = 0; i < cellCount; i++) {
         let x, y;
         if (raw) {
@@ -1334,14 +1279,14 @@
         const tone = rand();
         const base = tone < 0.55 ? PALETTE.saddle : tone < 0.85 ? PALETTE.espresso : PALETTE.rust;
         const alpha = raw ? lerp(0.10, 0.34, rand()) : lerp(0.14, 0.30, rand());
-  
+
         const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
         grad.addColorStop(0, rgba(base, alpha));
         grad.addColorStop(1, rgba(base, 0));
         ctx.fillStyle = grad;
         ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
       }
-  
+
       if (!raw) {
         ctx.strokeStyle = rgba(PALETTE.rustScreen, 0.16);
         ctx.lineWidth = 1;
@@ -1363,7 +1308,7 @@
           ctx.stroke();
         }
       }
-  
+
       const speck = raw ? 900 : 1400;
       for (let i = 0; i < speck; i++) {
         const x = rand() * w, y = rand() * h;
@@ -1371,7 +1316,7 @@
         ctx.fillRect(x, y, 1, 1);
       }
     }
-  
+
     function render() {
       if(!document.getElementById('canvasRaw')) return;
       drawGrain(document.getElementById('canvasRaw'), 1337, 'raw');
@@ -1380,34 +1325,35 @@
     render();
     let resizeT;
     window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(render, 200); });
-  
+
     const stage = document.getElementById('stage');
-    if(!stage) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) { 
-      stage.style.setProperty('--grow', '0%'); 
-    } else {
-      if(window.ScrollTrigger) {
-        window.ScrollTrigger.create({
-          trigger: stage,
-          start: "top bottom",
-          end: "bottom top",
-          onUpdate: (self) => {
-            const growPct = 50 - self.progress * 50;
+    if(stage) {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) {
+        stage.style.setProperty('--grow', '0%');
+      } else {
+        if(window.ScrollTrigger) {
+          window.ScrollTrigger.create({
+            trigger: stage,
+            start: "top bottom",
+            end: "bottom top",
+            onUpdate: (self) => {
+              const growPct = 50 - self.progress * 50;
+              stage.style.setProperty('--grow', growPct + '%');
+            }
+          });
+        } else {
+          function onScroll() {
+            const r = stage.getBoundingClientRect();
+            const vh = window.innerHeight;
+            let progress = (vh - r.top) / (vh + r.height);
+            progress = Math.max(0, Math.min(1, progress));
+            const growPct = (50 - progress * 50);
             stage.style.setProperty('--grow', growPct + '%');
           }
-        });
-      } else {
-        function onScroll() {
-          const r = stage.getBoundingClientRect();
-          const vh = window.innerHeight;
-          let progress = (vh - r.top) / (vh + r.height);
-          progress = Math.max(0, Math.min(1, progress));
-          const growPct = (50 - progress * 50);
-          stage.style.setProperty('--grow', growPct + '%');
+          document.addEventListener('scroll', onScroll, { passive: true });
+          onScroll();
         }
-        document.addEventListener('scroll', onScroll, { passive: true }); 
-        onScroll();
       }
     }
   })();

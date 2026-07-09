@@ -2,7 +2,10 @@
   /* Colors */
   --color-espresso: #2A1B10;
   --color-espresso-hero: #221509;
+  --color-espresso-soft: #2E1E10;
   --color-parchment: #F6F1E7;
+  --color-parchment-dim: rgba(246, 241, 231, 0.62);
+  --color-hairline: rgba(246, 241, 231, 0.16);
   --color-rust-logo: #A84000;
   --color-rust-screen: #B4500F;
   --color-saddle: #C0956A;
