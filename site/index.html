@@ -107,8 +107,8 @@
       font-size: 12px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(246, 241, 231, 0.62);
-      border-bottom: 1px solid rgba(246, 241, 231, 0.16);
+      color: var(--color-parchment-dim);
+      border-bottom: 1px solid var(--color-hairline);
       padding-bottom: 3px;
       transition: color .2s ease, border-color .2s ease;
     }
@@ -291,7 +291,6 @@
       }
 
       .leathers-section,
-      .craft-section,
       .process-terms-section {
         padding: 64px 24px;
       }
@@ -533,44 +532,38 @@
   <!-- ======================================================================
      SECTION 3: CRAFT
      ====================================================================== -->
-  <section class="craft-section" id="craft">
-    <div class="craft-inner">
-      <div class="craft-header" data-animate="fade-up">
-        <h2 class="section-title">The Craft</h2>
-        <p class="section-subtitle">Precision tanning and finishing, controlled at every step.</p>
+  <section class="craft" id="craft">
+    <div class="wrap">
+      <div class="craft-head" data-animate="fade-up">
+        <div class="eyebrow">Craft</div>
+        <h2 class="section-title">Selected, graded, finished by hand.</h2>
+        <p>Real photography of the tannery floor isn't something we can share yet.
+        What you're looking at instead is a generative material study, code, not
+        camera, built from the actual grain structure of hide leather: chaotic
+        and irregular where it's raw, ordered and refined where it's finished.
+        Scroll to watch one become the other.</p>
       </div>
-      <div class="napa-journey" data-stagger>
-        <div class="journey-step">
-          <div class="journey-photo">
-            <span class="placeholder-label">Awaiting real<br>photography</span>
-          </div>
-          <div class="journey-text">
-            <span class="step-label">Step 01 &middot; Selection</span>
-            <h3>Raw Material Sourcing</h3>
-            <p>Only the top 10% of raw hides pass initial inspection, ensuring the intrinsic structural integrity required for flagship napa. We prioritize pristine surfaces to avoid heavy corrective buffing.</p>
-          </div>
-        </div>
-        <div class="journey-step reverse">
-          <div class="journey-photo">
-            <span class="placeholder-label">Awaiting real<br>photography</span>
-          </div>
-          <div class="journey-text">
-            <span class="step-label">Step 02 &middot; Tanning</span>
-            <h3>Chrome-Free Processing</h3>
-            <p>Our controlled tanning cycle balances supple hand-feel with dimensional stability. Precise drumming times yield a consistent temper across the entire hide, minimizing edge waste.</p>
-          </div>
-        </div>
-        <div class="journey-step">
-          <div class="journey-photo">
-            <span class="placeholder-label">Awaiting real<br>photography</span>
-          </div>
-          <div class="journey-text">
-            <span class="step-label">Step 03 &middot; Finishing</span>
-            <h3>Aniline Polish</h3>
-            <p>A light, breathable finish preserves the natural grain and pore structure. The surface is treated to resist minor abrasions while maintaining the authentic, buttery touch of premium napa.</p>
-          </div>
-        </div>
+    </div>
+  
+    <div class="panel-stage" data-animate="fade-up" id="stage">
+      <div class="panel raw" id="panelRaw">
+        <canvas id="canvasRaw"></canvas>
+        <div class="panel-caption">Raw hide — material study, generative</div>
       </div>
+      <div class="panel finished" id="panelFinished">
+        <canvas id="canvasFinished"></canvas>
+        <div class="panel-caption">Finished grain — material study, generative</div>
+      </div>
+      <div class="seam"></div>
+    </div>
+  
+    <div class="wrap">
+      <p class="craft-note" data-animate="fade-up">
+        <strong>What you sample is what you receive in bulk.</strong>
+        No stock imagery, no AI-generated craft photography, ever, that rule
+        hasn't moved since the first brand kit. This panel says so honestly
+        instead of pretending otherwise.
+      </p>
     </div>
   </section>
 
@@ -820,124 +813,43 @@
       line-height: 1.6;
     }
 
-    /* Section 3: Craft */
-    .craft-section {
-      padding: 96px 40px;
-      background: var(--color-parchment);
-      color: var(--color-espresso-hero);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      position: relative;
+    /* Section 3: Craft (Generative) */
+    .craft { padding: 96px 0; }
+    .craft-head { max-width: 640px; margin-bottom: 56px; }
+    .craft-head p { margin-top: 16px; font-size: 16px; line-height: 1.6; color: rgba(34,21,9,0.8); max-width: 520px; }
+    
+    .panel-stage {
+      position: relative; width: 100vw; margin-left: calc(50% - 50vw);
+      height: 64vh; min-height: 420px; max-height: 640px;
+      background: var(--color-espresso-hero); overflow: hidden;
     }
-
-    .craft-inner {
-      max-width: 1200px;
-      width: 100%;
+    .panel {
+      position: absolute; top: 0; bottom: 0; width: 52%;
+      overflow: hidden; transition: clip-path .1s linear;
     }
-
-    .craft-header {
-      margin-bottom: 64px;
+    .panel canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .panel.raw { left: 0; clip-path: inset(0 var(--grow, 50%) 0 0); }
+    .panel.finished { right: 0; clip-path: inset(0 0 0 var(--grow, 50%)); }
+    .seam {
+      position: absolute; top: 0; bottom: 0; left: 50%; width: 1px;
+      background: var(--color-hairline); transform: translateX(-0.5px); z-index: 2;
     }
-
-    .napa-journey {
-      display: flex;
-      flex-direction: column;
-      gap: 120px;
+    .panel-caption {
+      position: absolute; bottom: 20px; z-index: 3;
+      font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--color-parchment-dim);
     }
-
-    .journey-step {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
+    .panel.raw .panel-caption { left: 24px; }
+    .panel.finished .panel-caption { right: 24px; text-align: right; }
+    
+    .craft-note {
+      margin-top: 28px; max-width: 640px; font-size: 14px; line-height: 1.6; color: rgba(34,21,9,0.7);
     }
-
-    .journey-step.reverse {
-      direction: rtl;
-    }
-
-    .journey-step.reverse > * {
-      direction: ltr;
-    }
-
-    .journey-photo {
-      aspect-ratio: 4 / 3;
-      background: var(--color-espresso-hero);
-      border: 1px solid rgba(34, 21, 9, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-    }
-
-    .journey-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-    }
-
-    .placeholder-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(246, 241, 231, 0.5);
-      line-height: 1.6;
-    }
-
-    .journey-text {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      max-width: 480px;
-    }
-
-    .step-label {
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--color-rust-screen);
-    }
-
-    .journey-text h3 {
-      font-family: var(--font-cormorant);
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 600;
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-    }
-
-    .journey-text p {
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--color-espresso-hero);
-      opacity: 0.8;
-    }
-
-    @media (max-width: 900px) {
-      .napa-journey {
-        gap: 80px;
-      }
-      .journey-step {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      .journey-step.reverse {
-        direction: ltr;
-      }
-      .journey-text {
-        max-width: 100%;
-      }
+    .craft-note strong { color: var(--color-espresso-hero); font-weight: 600; }
+    
+    @media(max-width: 720px) {
+      .craft { padding: 64px 0; }
+      .panel-stage { height: 48vh; min-height: 320px; }
     }
 
     /* Sections 4 & 5: Process & Terms */
@@ -1104,7 +1016,7 @@
     .form-group select {
       background: transparent;
       border: none;
-      border-bottom: 1px solid rgba(246, 241, 231, 0.16);
+      border-bottom: 1px solid var(--color-hairline);
       color: var(--color-parchment);
       font-family: var(--font-urbanist);
       font-size: 16px;
@@ -1127,7 +1039,7 @@
     }
 
     .form-group select option {
-      background: #2E1E10;
+      background: var(--color-espresso-soft);
       color: var(--color-parchment);
     }
 
@@ -1231,7 +1143,6 @@
     @media (max-width: 720px) {
 
       .leathers-section,
-      .craft-section,
       .process-terms-section {
         padding: 64px 24px;
       }
@@ -1366,6 +1277,140 @@
         }
       });
     });
+  </script>
+
+  <script>
+  /* ---------------------------------------------------------------------
+     Generative leather-grain material study.
+     ------------------------------------------------------------------- */
+  (function () {
+    function mulberry32(seed) {
+      return function () {
+        seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+        let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+  
+    const PALETTE = {
+      saddle: [192, 149, 106], espresso: [42, 27, 16],
+      rust: [168, 64, 0], rustScreen: [180, 80, 15],
+      tannin: [74, 82, 64], parchment: [246, 241, 231],
+    };
+    function rgba(c, a) { return `rgba(${c[0]},${c[1]},${c[2]},${a})`; }
+    function lerp(a, b, t) { return a + (b - a) * t; }
+  
+    function drawGrain(canvas, seed, mode) {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      const rand = mulberry32(seed);
+  
+      ctx.fillStyle = '#221509';
+      ctx.fillRect(0, 0, w, h);
+  
+      const raw = mode === 'raw';
+      const cellCount = raw ? 140 : 220;
+      const sizeMin = raw ? 10 : 6, sizeMax = raw ? 46 : 16;
+      const jitter = raw ? 1 : 0.25;
+  
+      const cols = Math.ceil(Math.sqrt(cellCount * (w / h)));
+      const rows = Math.ceil(cellCount / cols);
+      const cw = w / cols, ch = h / rows;
+  
+      for (let i = 0; i < cellCount; i++) {
+        let x, y;
+        if (raw) {
+          x = rand() * w; y = rand() * h;
+        } else {
+          const gx = i % cols, gy = Math.floor(i / cols);
+          x = (gx + 0.5) * cw + (rand() - 0.5) * cw * jitter;
+          y = (gy + 0.5) * ch + (rand() - 0.5) * ch * jitter;
+        }
+        const r = lerp(sizeMin, sizeMax, raw ? Math.pow(rand(), 1.4) : rand());
+        const tone = rand();
+        const base = tone < 0.55 ? PALETTE.saddle : tone < 0.85 ? PALETTE.espresso : PALETTE.rust;
+        const alpha = raw ? lerp(0.10, 0.34, rand()) : lerp(0.14, 0.30, rand());
+  
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+        grad.addColorStop(0, rgba(base, alpha));
+        grad.addColorStop(1, rgba(base, 0));
+        ctx.fillStyle = grad;
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+      }
+  
+      if (!raw) {
+        ctx.strokeStyle = rgba(PALETTE.rustScreen, 0.16);
+        ctx.lineWidth = 1;
+        const gap = 34;
+        for (let x = gap; x < w; x += gap) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+        }
+      } else {
+        ctx.strokeStyle = rgba(PALETTE.espresso, 0.18);
+        for (let i = 0; i < 5; i++) {
+          ctx.lineWidth = lerp(1, 2.4, rand());
+          ctx.beginPath();
+          let x = rand() * w, y = rand() * h;
+          ctx.moveTo(x, y);
+          for (let s = 0; s < 4; s++) {
+            x += (rand() - 0.5) * 90; y += (rand() - 0.5) * 40;
+            ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+      }
+  
+      const speck = raw ? 900 : 1400;
+      for (let i = 0; i < speck; i++) {
+        const x = rand() * w, y = rand() * h;
+        ctx.fillStyle = rgba(PALETTE.parchment, rand() * (raw ? 0.05 : 0.035));
+        ctx.fillRect(x, y, 1, 1);
+      }
+    }
+  
+    function render() {
+      if(!document.getElementById('canvasRaw')) return;
+      drawGrain(document.getElementById('canvasRaw'), 1337, 'raw');
+      drawGrain(document.getElementById('canvasFinished'), 7331, 'finished');
+    }
+    render();
+    let resizeT;
+    window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(render, 200); });
+  
+    const stage = document.getElementById('stage');
+    if(!stage) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) { 
+      stage.style.setProperty('--grow', '0%'); 
+    } else {
+      if(window.ScrollTrigger) {
+        window.ScrollTrigger.create({
+          trigger: stage,
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: (self) => {
+            const growPct = 50 - self.progress * 50;
+            stage.style.setProperty('--grow', growPct + '%');
+          }
+        });
+      } else {
+        function onScroll() {
+          const r = stage.getBoundingClientRect();
+          const vh = window.innerHeight;
+          let progress = (vh - r.top) / (vh + r.height);
+          progress = Math.max(0, Math.min(1, progress));
+          const growPct = (50 - progress * 50);
+          stage.style.setProperty('--grow', growPct + '%');
+        }
+        document.addEventListener('scroll', onScroll, { passive: true }); 
+        onScroll();
+      }
+    }
+  })();
   </script>
 </body>
 
