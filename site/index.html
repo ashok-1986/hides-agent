@@ -476,41 +476,6 @@
     </div>
   </section>
 
-  <section class="craft" id="craft">
-    <div class="wrap">
-      <div class="craft-head" data-animate="fade-up">
-        <div class="eyebrow">Craft</div>
-        <h2 class="section-title">Selected, graded, finished by hand.</h2>
-        <p>Real photography of the tannery floor isn't something we can share yet.
-        What you're looking at instead is a generative material study, code, not
-        camera, built from the actual grain structure of hide leather: chaotic
-        and irregular where it's raw, ordered and refined where it's finished.
-        Scroll to watch one become the other.</p>
-      </div>
-    </div>
-  
-    <div class="panel-stage" data-animate="fade-up" id="stage">
-      <div class="panel raw" id="panelRaw">
-        <canvas id="canvasRaw"></canvas>
-        <div class="panel-caption">Raw hide — material study, generative</div>
-      </div>
-      <div class="panel finished" id="panelFinished">
-        <canvas id="canvasFinished"></canvas>
-        <div class="panel-caption">Finished grain — material study, generative</div>
-      </div>
-      <div class="seam"></div>
-    </div>
-  
-    <div class="wrap">
-      <p class="craft-note" data-animate="fade-up">
-        <strong>What you sample is what you receive in bulk.</strong>
-        No stock imagery, no AI-generated craft photography, ever, that rule
-        hasn't moved since the first brand kit. This panel says so honestly
-        instead of pretending otherwise.
-      </p>
-    </div>
-  </section>
-
   <section class="process-terms-section" id="process">
     <div class="process-terms-inner">
 
@@ -749,57 +714,6 @@
       opacity: 0.7;
       max-width: 50ch;
       line-height: 1.6;
-    }
-
-    /* Section 3: Craft (Generative)
-       Fix: this section needs its own light background. It was authored
-       assuming a parchment page (see craft-head/craft-note text colours,
-       both dark-on-light), but had no background of its own, so it was
-       inheriting body's dark espresso and rendering that text invisible. */
-    .craft {
-      padding: 96px 0;
-      background: var(--color-parchment);
-      color: var(--color-espresso-hero);
-    }
-    .craft-head { max-width: 640px; margin-bottom: 56px; }
-    .craft-head p { margin-top: 16px; font-size: 16px; line-height: 1.6; color: rgba(34,21,9,0.8); max-width: 520px; }
-    .craft .eyebrow {
-      font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--color-rust-logo);
-    }
-
-    .panel-stage {
-      position: relative; width: 100vw; margin-left: calc(50% - 50vw);
-      height: 64vh; min-height: 420px; max-height: 640px;
-      background: var(--color-espresso-hero); overflow: hidden;
-    }
-    .panel {
-      position: absolute; top: 0; bottom: 0; width: 52%;
-      overflow: hidden; transition: clip-path .1s linear;
-    }
-    .panel canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-    .panel.raw { left: 0; clip-path: inset(0 var(--grow, 50%) 0 0); }
-    .panel.finished { right: 0; clip-path: inset(0 0 0 var(--grow, 50%)); }
-    .seam {
-      position: absolute; top: 0; bottom: 0; left: 50%; width: 1px;
-      background: var(--color-hairline); transform: translateX(-0.5px); z-index: 2;
-    }
-    .panel-caption {
-      position: absolute; bottom: 20px; z-index: 3;
-      font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--color-parchment-dim);
-    }
-    .panel.raw .panel-caption { left: 24px; }
-    .panel.finished .panel-caption { right: 24px; text-align: right; }
-
-    .craft-note {
-      margin-top: 28px; max-width: 640px; font-size: 14px; line-height: 1.6; color: rgba(34,21,9,0.7);
-    }
-    .craft-note strong { color: var(--color-espresso-hero); font-weight: 600; }
-
-    @media(max-width: 720px) {
-      .craft { padding: 64px 0; }
-      .panel-stage { height: 48vh; min-height: 320px; }
     }
 
     /* Sections 4 & 5: Process & Terms
